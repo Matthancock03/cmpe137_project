@@ -94,6 +94,9 @@ public class MainActivity extends Activity {
 
                             }
 
+                        APR = (APR/100)/12;
+                        Terms = Terms*12;
+
                         double MonthlyPayment = DownPay*((APR*Math.pow((1+APR), Terms))/(Math.pow((1+APR), Terms)-1));
 
                         DecimalFormat format = new DecimalFormat("#,###.00");
