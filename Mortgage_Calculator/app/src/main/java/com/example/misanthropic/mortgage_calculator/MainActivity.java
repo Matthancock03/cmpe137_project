@@ -10,15 +10,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import java.lang.Math;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MainActivity extends Activity {
 
+    //declares inputs
     EditText editText1;
     EditText editText2;
     EditText editText3;
     EditText editText4;
     EditText editText5;
 
+    //declares outputs
     TextView answer1;
     TextView answer2;
     TextView answer3;
@@ -29,6 +33,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //declares buttons
         Button ResetButton = (Button) findViewById(R.id.Reset);
         Button Calculate = (Button) findViewById(R.id.Calculate);
 
@@ -43,6 +48,7 @@ public class MainActivity extends Activity {
         answer3 = (TextView) findViewById(R.id.Answer3);
         answer4 = (TextView) findViewById(R.id.Answer4);
 
+        //checks if reset button is pressed
         ResetButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -51,23 +57,29 @@ public class MainActivity extends Activity {
                         editText3.setText("");
                         editText4.setText("");
                         editText5.setText("");
+                        answer1.setText("");
+                        answer2.setText("");
+                        answer3.setText("");
+                        answer4.setText("");
                     }
                 }
         );
 
+        //checks if calculate button is pressed
         Calculate.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
+                        //converting inputs to Doubles to be used for calculations
                         double Homevalue = 0;
                             try {
-                                Homevalue = Double.parseDouble(editText1.getText().toString().replaceAll("[.,]", ""));
+                                Homevalue = Double.parseDouble(editText1.getText().toString().replaceAll("[,]", ""));
                             }
                             catch (NumberFormatException e){
 
                             }
                         double DownPay = 0;
                             try{
-                                DownPay = Double.parseDouble(editText2.getText().toString().replaceAll("[.,]",""));
+                                DownPay = Double.parseDouble(editText2.getText().toString().replaceAll("[,]", ""));
                             }
                             catch (NumberFormatException e){
 
@@ -88,19 +100,36 @@ public class MainActivity extends Activity {
                             }
                         double TaxRate = 0;
                             try {
-                                Double.parseDouble(editText5.getText().toString());
+                                TaxRate = Double.parseDouble(editText5.getText().toString());
                             }
                             catch (NumberFormatException e){
 
                             }
 
+                        //gets calendar month
+                        Calendar cal = Calendar.getInstance();
+                        SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
+                        String month_name = month_date.format(cal.getTime());
+
+                        //gets calendar year
+                        cal.get(Calendar.YEAR);
+                        cal.add(Calendar.YEAR, (int)Terms);
+
+                        //calculations
+                        double Tax = Homevalue * Terms * TaxRate/100;
+                        double Principal = Homevalue - DownPay;
                         APR = (APR/100)/12;
                         Terms = Terms*12;
+                        double MonthlyPayment = Principal*((APR*Math.pow((1+APR), Terms))/(Math.pow((1+APR), Terms)-1));
+                        double TotalIntPaid = Terms * MonthlyPayment - Principal;
 
-                        double MonthlyPayment = DownPay*((APR*Math.pow((1+APR), Terms))/(Math.pow((1+APR), Terms)-1));
-
+                        //sets outputs
                         DecimalFormat format = new DecimalFormat("#,###.00");
+                        answer1.setText(format.format(Tax));
+                        answer2.setText(format.format(TotalIntPaid));
                         answer3.setText(format.format(MonthlyPayment));
+                        answer4.setText(month_name + " " + cal.get(Calendar.YEAR));
+
                     }
                 }
         );
@@ -129,7 +158,4 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void calculateMortgage(Menu menu){
-
-    }
 }

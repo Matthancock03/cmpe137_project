@@ -40,9 +40,9 @@
             android:ems="10"
             android:id="@+id/HomeValueField"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/DownPayField"
             android:inputType="numberDecimal"
-            android:digits="0123456789,." />
+            android:digits="0123456789,."
+            android:layout_alignStart="@+id/DownPayField" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -50,9 +50,10 @@
             android:ems="10"
             android:id="@+id/DownPayField"
             android:layout_below="@+id/HomeValueField"
-            android:layout_toEndOf="@+id/DownPayment"
+            android:layout_toEndOf="@+id/MonthlyPayment"
             android:inputType="numberDecimal"
-            android:digits="0123456789,." />
+            android:digits="0123456789,."
+            android:layout_above="@+id/APRField" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -136,9 +137,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/Answer1"
-            android:layout_alignBottom="@+id/TotalTaxPaid"
             android:layout_alignEnd="@+id/TermsField"
-            android:layout_toEndOf="@+id/TotalInterestPaid" />
+            android:layout_toEndOf="@+id/TotalInterestPaid"
+            android:layout_above="@+id/TotalInterestPaid"
+            android:layout_marginLeft="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -185,7 +187,9 @@
             android:id="@+id/Answer3"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/TotalInterestPaid"
-            android:layout_alignBottom="@+id/MonthlyPayment" />
+            android:layout_alignBottom="@+id/MonthlyPayment"
+            android:layout_alignTop="@+id/MonthlyPayment"
+            android:layout_alignStart="@+id/Answer2" />
 
         <Button
             android:layout_width="wrap_content"
