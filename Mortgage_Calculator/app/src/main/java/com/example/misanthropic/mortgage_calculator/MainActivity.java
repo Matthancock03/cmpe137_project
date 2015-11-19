@@ -23,10 +23,10 @@ public class MainActivity extends Activity {
     EditText editText5;
 
     //declares outputs
-    TextView answer1;
-    TextView answer2;
-    TextView answer3;
-    TextView answer4;
+    TextView PaymentAnswer;
+    TextView InterestPaidAnswer;
+    TextView MonthlyPaymentAnswer;
+    TextView PayoffDateAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,10 @@ public class MainActivity extends Activity {
         editText4 = (EditText) findViewById(R.id.TermsField);
         editText5 = (EditText) findViewById(R.id.TaxRateField);
 
-        answer1 = (TextView) findViewById(R.id.Answer1);
-        answer2 = (TextView) findViewById(R.id.Answer2);
-        answer3 = (TextView) findViewById(R.id.Answer3);
-        answer4 = (TextView) findViewById(R.id.Answer4);
+        PaymentAnswer = (TextView) findViewById(R.id.PaymentAnswer);
+        InterestPaidAnswer = (TextView) findViewById(R.id.InterestPaidAnswer);
+        MonthlyPaymentAnswer = (TextView) findViewById(R.id.MonthlyPaymentAnswer);
+        PayoffDateAnswer = (TextView) findViewById(R.id.PayoffDateAnswer);
 
         //checks if reset button is pressed
         ResetButton.setOnClickListener(
@@ -57,10 +57,10 @@ public class MainActivity extends Activity {
                         editText3.setText("");
                         editText4.setText("");
                         editText5.setText("");
-                        answer1.setText("");
-                        answer2.setText("");
-                        answer3.setText("");
-                        answer4.setText("");
+                        PaymentAnswer.setText("");
+                        InterestPaidAnswer.setText("");
+                        MonthlyPaymentAnswer.setText("");
+                        PayoffDateAnswer.setText("");
                     }
                 }
         );
@@ -125,10 +125,10 @@ public class MainActivity extends Activity {
 
                         //sets outputs
                         DecimalFormat format = new DecimalFormat("#,###.00");
-                        answer1.setText(format.format(Tax));
-                        answer2.setText(format.format(TotalIntPaid));
-                        answer3.setText(format.format(MonthlyPayment));
-                        answer4.setText(month_name + " " + cal.get(Calendar.YEAR));
+                        PaymentAnswer.setText(format.format(Tax));
+                        InterestPaidAnswer.setText(format.format(TotalIntPaid));
+                        MonthlyPaymentAnswer.setText(format.format(MonthlyPayment));
+                        PayoffDateAnswer.setText(month_name + " " + cal.get(Calendar.YEAR));
 
                     }
                 }
