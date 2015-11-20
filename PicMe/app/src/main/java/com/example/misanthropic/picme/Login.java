@@ -13,13 +13,13 @@ import java.util.Map;
 
 
 public class Login extends AppCompatActivity {
-    Firebase myFirebaseRef = new Firebase("https://PicMe.firebaseio.com/");
+    Firebase myFirebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-
+        myFirebaseRef = new Firebase("https://PicMe.firebaseio.com/");
         setContentView(R.layout.activity_login);
     }
 
