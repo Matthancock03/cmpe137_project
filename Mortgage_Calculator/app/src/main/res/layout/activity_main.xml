@@ -159,10 +159,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/PaymentAnswer"
-            android:layout_toEndOf="@+id/Payment"
+            android:layout_toEndOf="@+id/TotalTaxPaid"
             android:layout_marginLeft="20dp"
             android:layout_alignParentRight="true"
-            android:layout_alignBaseline="@+id/Payment" />
+            android:layout_alignBaseline="@+id/TotalTaxPaid" />
 
         <TextView
             android:layout_width="wrap_content"
