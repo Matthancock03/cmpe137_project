@@ -2,6 +2,17 @@
     <string name="app_name">PicMe</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="firebase_url">https://picme.firebaseio.com</string>
+
+    <!-- Your Facebook App ID from your app settings on https://developers.facebook.com/ -->
+    <!-- More details here: https://www.firebase.com/docs/android/guide/login/facebook.html -->
+    <string name="facebook_app_id">1666313773607968</string>
+
+    <!-- Your Twitter consumer key and secret from your app settings on https://apps.twitter.com/ -->
+    <!-- More details here: https://www.firebase.com/docs/android/guide/login/twitter.html -->
+    <string name="twitter_consumer_key">7MYnmN3XkAuxLB42sQiobkKW1</string>
+    <string name="twitter_consumer_secret">PKNRX5Or50ulo33JE0x9VV0xtrZTsgW84QjtQOOnc1kMhtaVtA</string>
+
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

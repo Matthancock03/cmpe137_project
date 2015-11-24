@@ -1,5 +1,6 @@
 package com.example.misanthropic.picme;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,9 +8,9 @@ import android.view.MenuItem;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.facebook.FacebookSdk;
 
 import java.util.Map;
-
 
 
 public class Login extends AppCompatActivity {
@@ -20,6 +21,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://PicMe.firebaseio.com/");
+
+
         setContentView(R.layout.activity_login);
     }
 
@@ -61,5 +64,26 @@ public class Login extends AppCompatActivity {
 
     public void login(){
 
+    }
+
+    Firebase ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
+
+    private void onFacebookAccessTokenChange(com.facebook.AccessToken token) {
+        if (token != null) {
+            ref.authWithOAuthToken("facebook", token.getToken(), new Firebase.AuthResultHandler() {
+                @Override
+                public void onAuthenticated(com.firebase.client.AuthData  authData) {
+                    // The Facebook user is now authenticated with your Firebase app
+                }
+
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    // there was an error
+                }
+            });
+        } else {
+        /* Logged out of Facebook so do a logout from the Firebase app */
+            ref.unauth();
+        }
     }
 }
