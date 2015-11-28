@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.firebase.client.Firebase;
 
+import android.widget.GridView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,7 +52,12 @@ public class AlbumViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_album_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_album_view, container, false);
+
+        GridView gridview = (GridView) view.findViewById(R.id.gridview);
+
+        return view;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
