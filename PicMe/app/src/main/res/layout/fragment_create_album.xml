@@ -48,7 +48,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create An Album"
+        android:text="Upload an image to create an album"
         android:id="@+id/createHeader"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="100dp"
