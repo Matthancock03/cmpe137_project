@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -34,6 +35,8 @@ public class CreateAlbumFragment extends Fragment {
     MainActivity main = (MainActivity)getActivity();
     String email = main.getUserEmail();
     EditText albumName;
+    Button createButton;
+
     private int PICK_IMAGE_REQUEST = 1;
 
     private OnFragmentInteractionListener mListener;
@@ -56,6 +59,13 @@ public class CreateAlbumFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(getActivity());
         ref = new Firebase("https://PicMe.firebaseio.com/users");
+        createButton = (Button)getActivity().findViewById(R.id.createAlbum);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                createAlbum(v);
+            }
+        });
     }
 
     @Override
@@ -99,7 +109,7 @@ public class CreateAlbumFragment extends Fragment {
     public void createAlbum(View v){
         albumName = (EditText) v.findViewById(R.id.albumName);
         Log.d("Debug", albumName.toString());
-
+        //uploadImage();
     }
 
     @Override
@@ -110,10 +120,7 @@ public class CreateAlbumFragment extends Fragment {
             Uri uri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(main.getContentResolver(), uri);
-                // Log.d(TAG, String.valueOf(bitmap));
 
-                //ImageView imageView = (ImageView) main.findViewById(R.id.imageView);
-                //imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }

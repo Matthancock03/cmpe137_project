@@ -22,18 +22,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:src="@mipmap/albumImage"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/uploadImage"
-        android:id="@+id/addImage"
+        android:id="@+id/createAlbum"
         android:layout_gravity="center_horizontal|bottom"
         android:width="150dp"
         android:background="#3f7fff"
         android:textColor="#ffffff"
-        android:layout_marginBottom="75dp" />
+        android:layout_marginBottom="75dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -42,7 +45,7 @@
         android:layout_gravity="center_horizontal|bottom"
         android:hint="Album Name"
         android:layout_marginBottom="125dp"
-        android:width="200dp"
+        android:width="300dp"
         android:gravity="center" />
 
     <TextView
