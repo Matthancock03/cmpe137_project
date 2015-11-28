@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.misanthropic.picme.MainActivityFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/picme"
+        android:id="@+id/header"
+        android:layout_marginTop="35dp"
+        android:editable="false"
+        android:gravity="center_horizontal"
+        android:textSize="55dp"
+        android:textStyle="bold|italic"
+        android:textColor="#3f7fff"
+        android:singleLine="false"
+        android:layout_gravity="center_horizontal|top" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_button"
+        android:id="@+id/view_album"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_button"
+        android:id="@+id/create_album"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share_button"
+        android:id="@+id/share_album"
+        android:layout_gravity="center"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/friends_button"
+        android:id="@+id/friends"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff" />
+
+
+</FrameLayout>

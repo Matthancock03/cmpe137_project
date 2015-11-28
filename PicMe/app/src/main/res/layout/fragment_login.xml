@@ -20,46 +20,10 @@
         android:textColor="#3f7fff"
         android:singleLine="false" />
 
-    <EditText
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/email"
-        android:layout_gravity="center"
-        android:contentDescription="Email"
-        android:editable="false"
-        android:hint="Email"
-        android:layout_marginBottom="50dp"
-        android:gravity="center_horizontal"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/password"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:hint="Password" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Login"
-        android:id="@+id/loginText"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="120dp"
-        android:textColor="#010101"
-        android:textSize="20dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/submitLogin"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="100dp" />
+        android:layout_gravity="center" />
 
 </FrameLayout>
