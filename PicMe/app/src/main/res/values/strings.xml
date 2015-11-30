@@ -24,4 +24,5 @@
     <string name="friends_button">Friends</string>
     <string name="uploadImage">Upload Image</string>
     <string name="addPhoto">Add Photo</string>
+    <string name="deletePhoto">Delete Photo</string>
 </resources>

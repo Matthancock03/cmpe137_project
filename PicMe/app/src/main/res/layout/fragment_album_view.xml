@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <GridView
         android:layout_width="match_parent"
@@ -20,13 +20,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/addPhoto"
-        android:id="@+id/button"
+        android:id="@+id/addphoto"
         android:layout_gravity="center_horizontal|bottom"
         android:width="150dp"
         android:background="#3f7fff"
         android:textColor="#ffffff"
+        android:layout_marginStart="25dp"
         android:layout_below="@+id/gridview"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deletePhoto"
+        android:id="@+id/deletephoto"
+        android:layout_gravity="center_horizontal|bottom"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"
+        android:layout_marginEnd="25dp"
+        android:layout_below="@+id/gridview"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp" />
 
 
 </RelativeLayout>
