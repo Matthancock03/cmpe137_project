@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/share_email_field"
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
         android:hint="Email"
@@ -69,7 +69,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+        android:id="@+id/share_image_placeholder"
         android:layout_gravity="center"
         android:src="@mipmap/album_image"
         android:paddingLeft="15dp"
