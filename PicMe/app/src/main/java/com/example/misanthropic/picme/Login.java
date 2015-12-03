@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.simplelogin.FirebaseSimpleLoginError;
@@ -21,6 +22,7 @@ public class Login extends AppCompatActivity //implements
     private EditText user;
     private EditText pass;
     private Button login;
+    private Button createuser;
 
     public SimpleLogin authClient;
 
@@ -99,6 +101,8 @@ public class Login extends AppCompatActivity //implements
             user = (EditText) findViewById(R.id.UserField);
             pass = (EditText) findViewById(R.id.PassField);
             login = (Button) findViewById(R.id.Login);
+            createuser = (Button) findViewById(R.id.createuser);
+
             authClient = new SimpleLogin(myFirebaseRef, getApplicationContext());
 
             login.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +111,14 @@ public class Login extends AppCompatActivity //implements
                     login();
                 }
             });
+
+            createuser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    createuser();
+                }
+            });
+
             /*
             OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
             if (opr.isDone()) {
@@ -257,6 +269,19 @@ public class Login extends AppCompatActivity //implements
                 } else {
                     // We are now logged in
                     GoToActivity();
+                }
+            }
+        });
+    }
+
+    public void createuser(){
+        authClient.createUser(user.getText().toString(), pass.getText().toString(), new SimpleLoginAuthenticatedHandler() {
+            public void authenticated(FirebaseSimpleLoginError error, FirebaseSimpleLoginUser user) {
+                if(error != null) {
+                    Toast.makeText(Login.this, "Username is taken", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(Login.this, "New Account created", Toast.LENGTH_SHORT).show();
                 }
             }
         });
