@@ -1,7 +1,7 @@
 package com.example.misanthropic.picme;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
 import com.firebase.client.Firebase;
 
@@ -13,7 +13,7 @@ import com.firebase.client.Firebase;
  * Use the {@link AlbumViewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AlbumViewFragment extends FragmentActivity {
+public class AlbumViewFragment extends Fragment {
 
     Firebase ref;
     Firebase user;
