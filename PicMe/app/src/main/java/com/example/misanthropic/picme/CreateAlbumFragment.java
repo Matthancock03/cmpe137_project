@@ -19,19 +19,11 @@ import com.firebase.client.Firebase;
 import java.io.IOException;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CreateAlbumFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CreateAlbumFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CreateAlbumFragment extends Fragment {
 
     Firebase ref;
     Firebase album;
-    MainActivity main = (MainActivity)getActivity();
+    MainActivity main = (MainActivity)getActivity(); // You can use this object to access methods and variables in Main Activity.
     String email = main.getUserEmail();
     EditText albumName;
     Button createButton;
@@ -50,7 +42,6 @@ public class CreateAlbumFragment extends Fragment {
     }
 
     public CreateAlbumFragment() {
-        // Required empty public constructor
     }
 
     @Override
