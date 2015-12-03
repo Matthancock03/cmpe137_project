@@ -231,8 +231,10 @@ public class Login extends AppCompatActivity implements
 
     public void login(String email) {
         Log.d("USER_EMAIL", email);
+        Bundle bundle = new Bundle();
+        bundle.putString("USER_EMAIL", email);
         Intent mainIntent = new Intent(this, MainActivity.class);
-        mainIntent.putExtra("USER_EMAIL", email);
+        mainIntent.putExtras(bundle);
         startActivity(mainIntent);
     }
 

@@ -32,7 +32,7 @@ public class CreateAlbumFragment extends Fragment {
     Firebase ref;
     Firebase album;
     MainActivity main = (MainActivity)getActivity();
-    //String email = main.getUserEmail();
+    String email = main.getUserEmail();
     EditText albumName;
     Button createButton;
 

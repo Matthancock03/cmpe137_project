@@ -6,16 +6,17 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 
 //public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
 public class MainActivity extends FragmentActivity{
-    //String userEmail = getIntent().getExtras().getString("USER_EMAIL","No Email");
 
-    String userEmail;//= getIntent().getExtras().getString("USER_EMAIL","No Email");
+    String userEmail;
     private Button viewalbum;
     private Button sharealbum;
     private Button createalbum;
@@ -25,24 +26,15 @@ public class MainActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        getIntent();
+        loadBundle(); // Pulls data passed from other activities out of Bundles
+
 
         viewalbum = (Button) findViewById(R.id.view_album);
-        createalbum = (Button) findViewById(R.id.create_album);
 
         viewalbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 StartViewAlbumActivity();
-            }
-        });
-
-        createalbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StartCreateAlbumActivity();
             }
         });
 
@@ -71,10 +63,21 @@ public class MainActivity extends FragmentActivity{
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
-    /*
+
     public String getUserEmail(){
         return userEmail;
-    }*/
+    }
+
+    public void loadBundle(){
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if(!extras.isEmpty() && extras.containsKey("USER_EMAIL")){
+            TextView text = (TextView)findViewById(R.id.displayHeader);
+            userEmail = extras.getString("USER_EMAIL");
+            Log.d("Email in Main" , userEmail);
+            text.setText(text.getText() + " " + userEmail);
+        }
+    }
 
     /*
     @Override
