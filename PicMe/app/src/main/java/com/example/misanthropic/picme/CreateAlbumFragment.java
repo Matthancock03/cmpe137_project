@@ -17,6 +17,7 @@ import android.widget.EditText;
 import com.firebase.client.Firebase;
 
 import java.io.IOException;
+import java.util.zip.Inflater;
 
 
 public class CreateAlbumFragment extends Fragment {
@@ -47,22 +48,24 @@ public class CreateAlbumFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Firebase.setAndroidContext(getActivity());
-        ref = new Firebase("https://PicMe.firebaseio.com/users");
-        createButton = (Button)getActivity().findViewById(R.id.createAlbum);
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                createAlbum(v);
-            }
-        });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_album, container, false);
+        Firebase.setAndroidContext(getActivity());
+        View inflate = inflater.inflate(R.layout.fragment_create_album, container, false);
+        ref = new Firebase("https://PicMe.firebaseio.com/albums");
+        createButton = (Button) getActivity().findViewById(R.id.create_album);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Create Album", "In click Listener");
+                createAlbum();
+            }
+        });
+        return inflate;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -96,10 +99,10 @@ public class CreateAlbumFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    public void createAlbum(View v){
-        albumName = (EditText) v.findViewById(R.id.albumName);
+    public void createAlbum(){
+        albumName = (EditText) getActivity().findViewById(R.id.albumName);
         Log.d("Debug", albumName.toString());
-        //uploadImage();
+        uploadImage();
     }
 
     @Override
