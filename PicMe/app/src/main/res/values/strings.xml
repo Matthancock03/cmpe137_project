@@ -14,7 +14,7 @@
     <string name="twitter_consumer_secret">PKNRX5Or50ulo33JE0x9VV0xtrZTsgW84QjtQOOnc1kMhtaVtA</string>
 
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="share_button">Share Albums</string>
@@ -23,6 +23,11 @@
     <string name="create_button">Create Album</string>
     <string name="friends_button">Friends</string>
     <string name="uploadImage">Upload Image</string>
+    <string name="addAlbum">Add Album</string>
+    <string name="deleteAlbum">Delete Album</string>
     <string name="addPhoto">Add Photo</string>
     <string name="deletePhoto">Delete Photo</string>
+    <string name="title_activity_create_album">CreateAlbumActivity</string>
+    <string name="title_activity_album_view">album_view</string>
+    <string name="title_activity_photo_view">PhotoView</string>
 </resources>

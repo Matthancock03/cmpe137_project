@@ -1,24 +1,19 @@
 package com.example.misanthropic.picme;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.firebase.client.Firebase;
-
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.BaseAdapter;
+
+import com.firebase.client.Firebase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,8 +60,8 @@ public class AlbumViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_album_view, container, false);
 
         GridView gridview = (GridView) view.findViewById(R.id.gridview);
-        Button addphoto = (Button) view.findViewById(R.id.addphoto);
-        Button deletephoto = (Button) view.findViewById(R.id.deletephoto);
+        Button addAlbum = (Button) view.findViewById(R.id.addalbum);
+        Button deleteAlbum = (Button) view.findViewById(R.id.deletealbum);
 
         // TODO: get images from Firebase
 
@@ -80,14 +75,14 @@ public class AlbumViewFragment extends Fragment {
             }
         });
 
-        addphoto.setOnClickListener(new View.OnClickListener() {
+        addAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: implement add image
             }
         });
 
-        deletephoto.setOnClickListener(new View.OnClickListener() {
+        deleteAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
