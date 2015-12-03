@@ -28,7 +28,7 @@ public class AlbumViewFragment extends Fragment {
     Firebase ref;
     Firebase user;
     MainActivity main = (MainActivity)getActivity();
-    String email = main.getUserEmail();
+    //String email = main.getUserEmail();
 
     private int PICK_IMAGE_REQUEST = 1;
 

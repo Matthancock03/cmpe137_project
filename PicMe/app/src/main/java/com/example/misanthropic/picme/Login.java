@@ -1,39 +1,22 @@
 package com.example.misanthropic.picme;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 import com.firebase.simplelogin.FirebaseSimpleLoginError;
 import com.firebase.simplelogin.FirebaseSimpleLoginUser;
 import com.firebase.simplelogin.SimpleLogin;
 import com.firebase.simplelogin.SimpleLoginAuthenticatedHandler;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 
 
-
-
-public class Login extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+public class Login extends AppCompatActivity //implements
+       /* GoogleApiClient.OnConnectionFailedListener,
+        View.OnClickListener*/ {
 
     private EditText user;
     private EditText pass;
@@ -42,33 +25,22 @@ public class Login extends AppCompatActivity implements
     public SimpleLogin authClient;
 
     Firebase myFirebaseRef;
-    private static final String TAG = "SignInActivity";
-    private static final int RC_SIGN_IN = 9001;
+    //private static final String TAG = "SignInActivity";
+    //private static final int RC_SIGN_IN = 9001;
 
+    /*
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
-    private ProgressDialog mProgressDialog;
+    private ProgressDialog mProgressDialog;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        myFirebaseRef = new Firebase("https://PicMe.firebaseio.com/");
 
-        user = (EditText) findViewById(R.id.UserField);
-        pass = (EditText) findViewById(R.id.PassField);
-        login = (Button) findViewById(R.id.Login);
-        authClient = new SimpleLogin(myFirebaseRef, getApplicationContext());
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
 
         setContentView(R.layout.activity_login);
-
+        /*
         Button nextview = (Button) findViewById(R.id.nextview);
 
         nextview.setOnClickListener(new View.OnClickListener() {
@@ -98,9 +70,9 @@ public class Login extends AppCompatActivity implements
             // Build a GoogleApiClient with access to the Google Sign-In API and the
             // options specified by gso.
             mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                    .build();
+                    .enableAutoManage(this /* FragmentActivity *///, this /* OnConnectionFailedListener */)
+                    //.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    //.build();
             // [END build_client]
 
             // [START customize_button]
@@ -111,16 +83,31 @@ public class Login extends AppCompatActivity implements
             // may be displayed when only basic profile is requested. Try adding the
             // Scopes.PLUS_LOGIN scope to the GoogleSignInOptions to see the
             // difference.
+        /*
             SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
             signInButton.setSize(SignInButton.SIZE_STANDARD);
             signInButton.setScopes(gso.getScopeArray());
-            // [END customize_button]
+            // [END customize_button]*/
         }
 
         @Override
         public void onStart() {
             super.onStart();
 
+            myFirebaseRef = new Firebase("https://shining-heat-4056.firebaseio.com/");
+
+            user = (EditText) findViewById(R.id.UserField);
+            pass = (EditText) findViewById(R.id.PassField);
+            login = (Button) findViewById(R.id.Login);
+            authClient = new SimpleLogin(myFirebaseRef, getApplicationContext());
+
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login();
+                }
+            });
+            /*
             OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
             if (opr.isDone()) {
                 // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
@@ -137,9 +124,10 @@ public class Login extends AppCompatActivity implements
                         handleSignInResult(googleSignInResult);
                     }
                 });
-            }
+            }*/
         }
 
+    /*
         // [START onActivityResult]
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -254,6 +242,11 @@ public class Login extends AppCompatActivity implements
      Intent mainIntent = new Intent(this, MainActivity.class);
      mainIntent.putExtra("USER_EMAIL", email);
      startActivity(mainIntent);
+    }*/
+
+    public void GoToActivity(){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void login(){
@@ -263,6 +256,7 @@ public class Login extends AppCompatActivity implements
                     // There was an error logging into this account
                 } else {
                     // We are now logged in
+                    GoToActivity();
                 }
             }
         });

@@ -1,31 +1,24 @@
 package com.example.misanthropic.picme;
 
-import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.io.ByteArrayOutputStream;
 
-public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
-
-    String userEmail = getIntent().getExtras().getString("USER_EMAIL","No Email");
+//public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
+public class MainActivity extends FragmentActivity{
+    //String userEmail = getIntent().getExtras().getString("USER_EMAIL","No Email");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        getIntent();
 
     }
 
@@ -42,16 +35,18 @@ public class MainActivity extends AppCompatActivity implements CreateAlbumFragme
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
+    /*
     public String getUserEmail(){
         return userEmail;
-    }
+    }*/
 
+    /*
     @Override
     public void onFragmentInteraction(Uri uri) {
 
-    }
+    }*/
 
-
+    /*
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -63,6 +58,6 @@ public class MainActivity extends AppCompatActivity implements CreateAlbumFragme
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
-    }
+    }*/
 
 }
