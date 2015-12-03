@@ -28,13 +28,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left|top"
         android:layout_below="@+id/Login"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:ems="10"
+        android:hint="Email"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/UserField"
         android:layout_gravity="right|center_vertical"
         android:layout_above="@+id/PassField"
@@ -47,6 +52,9 @@
         android:id="@+id/Login"
         android:layout_gravity="left|bottom"
         android:layout_below="@+id/PassField"
+        android:layout_marginTop="15dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"
         android:layout_alignStart="@+id/sign_in_button"
         android:layout_alignEnd="@+id/sign_in_button" />
 
@@ -54,37 +62,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:ems="10"
+        android:hint="Password"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/PassField"
         android:layout_gravity="right|bottom"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/Login" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Email"
-        android:id="@+id/textView"
-        android:layout_above="@+id/PassField"
-        android:layout_toStartOf="@+id/header" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Password"
-        android:id="@+id/textView2"
-        android:layout_above="@+id/Login"
-        android:layout_toStartOf="@+id/Login" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create New Account"
         android:id="@+id/createuser"
-        android:layout_marginTop="57dp"
-        android:layout_below="@+id/sign_in_button"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
