@@ -18,7 +18,7 @@ import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
 
-    String userEmail = getIntent().getExtras().getString("USER_EMAIL","No Email");
+    String userEmail;//= getIntent().getExtras().getString("USER_EMAIL","No Email");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

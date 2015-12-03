@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center"
-        android:src="@mipmap/albumImage"
+        android:src="@mipmap/album_image"
         android:paddingLeft="15dp"
         android:paddingRight="15dp" />
 
@@ -36,7 +36,8 @@
         android:width="150dp"
         android:background="#3f7fff"
         android:textColor="#ffffff"
-        android:layout_marginBottom="75dp"/>
+        android:layout_marginBottom="75dp"
+        android:onClick="uploadImage" />
 
     <EditText
         android:layout_width="wrap_content"

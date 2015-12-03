@@ -6,7 +6,7 @@
 
     <!-- Your Facebook App ID from your app settings on https://developers.facebook.com/ -->
     <!-- More details here: https://www.firebase.com/docs/android/guide/login/facebook.html -->
-    <string name="facebook_app_id">1666313773607968</string>
+    <string name="server_client_ID">162576509261-tin52vobqivh2p8fkecdc99jt448gc0s.apps.googleusercontent.com</string>
 
     <!-- Your Twitter consumer key and secret from your app settings on https://apps.twitter.com/ -->
     <!-- More details here: https://www.firebase.com/docs/android/guide/login/twitter.html -->
