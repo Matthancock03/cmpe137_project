@@ -23,9 +23,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center"
-        android:src="@mipmap/album_image"
+        android:src="@mipmap/create_album_image"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp" />
+        android:paddingRight="15dp"
+        android:layout_marginBottom="25dp" />
 
     <Button
         android:layout_width="wrap_content"

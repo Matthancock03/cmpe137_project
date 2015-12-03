@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -20,6 +23,9 @@ import com.firebase.client.FirebaseError;
 import java.io.IOException;
 import java.util.Map;
 
+import com.firebase.simplelogin.FirebaseSimpleLoginError;
+import com.firebase.simplelogin.FirebaseSimpleLoginUser;
+import com.firebase.simplelogin.SimpleLoginAuthenticatedHandler;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
@@ -35,8 +41,6 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.common.Scopes;
-
-
 
 
 public class Login extends AppCompatActivity implements
@@ -121,6 +125,25 @@ public class Login extends AppCompatActivity implements
                     handleSignInResult(googleSignInResult);
                 }
             });
+
+            /*
+            OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+            if (opr.isDone()) {
+                // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+                // and the GoogleSignInResult will be available instantly.
+                Log.d(TAG, "Got cached sign-in");
+                GoogleSignInResult result = opr.get();
+                handleSignInResult(result);
+            } else {
+                showProgressDialog();
+                opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                    @Override
+                    public void onResult(GoogleSignInResult googleSignInResult) {
+                        hideProgressDialog();
+                        handleSignInResult(googleSignInResult);
+                    }
+                });
+            }*/
         }
     }
 
@@ -234,6 +257,7 @@ public class Login extends AppCompatActivity implements
         Bundle bundle = new Bundle();
         bundle.putString("USER_EMAIL", email);
         Intent mainIntent = new Intent(this, MainActivity.class);
+
         mainIntent.putExtras(bundle);
         startActivity(mainIntent);
     }
@@ -242,7 +266,7 @@ public class Login extends AppCompatActivity implements
     public void onConnected(final Bundle bundle) {
         /* Connected with Google API, use this to authenticate with Firebase */
         Log.d("ON Connected", "Connected");
-        getGoogleOAuthTokenAndLogin("Matthancock03@gmail.com");
+        getGoogleOAuthTokenAndLogin("Sample@gmail.com");
     }
 
     private void getGoogleOAuthTokenAndLogin(final String email) {

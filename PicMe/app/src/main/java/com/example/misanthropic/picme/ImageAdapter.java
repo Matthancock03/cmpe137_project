@@ -12,7 +12,7 @@ import android.widget.ImageView;
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    public static Integer Images[] = {};
+    public static Integer [] Images;
 
     public ImageAdapter(Context c, Integer [] Image) {
         mContext = c;
