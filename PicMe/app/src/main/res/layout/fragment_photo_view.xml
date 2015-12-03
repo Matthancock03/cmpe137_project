@@ -19,8 +19,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addAlbum"
-        android:id="@+id/AddAlbum"
+        android:text="@string/addPhoto"
+        android:id="@+id/addphoto"
         android:layout_gravity="center_horizontal|bottom"
         android:width="150dp"
         android:background="#3f7fff"
@@ -33,8 +33,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/deleteAlbum"
-        android:id="@+id/DeleteAlbum"
+        android:text="@string/deletePhoto"
+        android:id="@+id/deletephoto"
         android:layout_gravity="center_horizontal|bottom"
         android:width="150dp"
         android:background="#3f7fff"

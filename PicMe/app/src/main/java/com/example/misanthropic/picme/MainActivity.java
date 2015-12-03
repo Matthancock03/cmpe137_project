@@ -1,32 +1,61 @@
 package com.example.misanthropic.picme;
 
-import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.io.ByteArrayOutputStream;
 
-public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
+//public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
+public class MainActivity extends FragmentActivity{
+    //String userEmail = getIntent().getExtras().getString("USER_EMAIL","No Email");
 
     String userEmail;//= getIntent().getExtras().getString("USER_EMAIL","No Email");
+    private Button viewalbum;
+    private Button sharealbum;
+    private Button createalbum;
+    private Button friends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        getIntent();
 
+        viewalbum = (Button) findViewById(R.id.view_album);
+        createalbum = (Button) findViewById(R.id.create_album);
+
+        viewalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartViewAlbumActivity();
+            }
+        });
+
+        createalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartCreateAlbumActivity();
+            }
+        });
+
+    }
+
+    public void StartCreateAlbumActivity(){
+        Intent GotoCreateAlbum = new Intent(this, CreateAlbum.class);
+        startActivity(GotoCreateAlbum);
+    }
+
+    public void StartViewAlbumActivity(){
+        Intent startViewAlbum = new Intent(this, AlbumView.class);
+        startActivity(startViewAlbum);
     }
 
     // Use this to convert image before saving to Firebase
@@ -42,16 +71,18 @@ public class MainActivity extends AppCompatActivity implements CreateAlbumFragme
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
+    /*
     public String getUserEmail(){
         return userEmail;
-    }
+    }*/
 
+    /*
     @Override
     public void onFragmentInteraction(Uri uri) {
 
-    }
+    }*/
 
-
+    /*
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -63,6 +94,6 @@ public class MainActivity extends AppCompatActivity implements CreateAlbumFragme
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
-    }
+    }*/
 
 }

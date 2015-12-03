@@ -277,27 +277,27 @@ public class Login extends AppCompatActivity implements
                 return token;
             }
 
-                    @Override
-                    protected void onPostExecute(String token) {
-                        if (token != null) {
-                            myFirebaseRef.authWithOAuthToken("google", token, new Firebase.AuthResultHandler() {
-                                @Override
-                                public void onAuthenticated(AuthData authData) {
+            @Override
+            protected void onPostExecute(String token) {
+                if (token != null) {
+                    myFirebaseRef.authWithOAuthToken("google", token, new Firebase.AuthResultHandler() {
+                        @Override
+                        public void onAuthenticated(AuthData authData) {
 
-                                    Log.d("Firebase: ", "Authenticated. Changing activity");
-                                    login(email);
-                                }
-
-                                @Override
-                                public void onAuthenticationError(FirebaseError firebaseError) {
-                                    Log.d("Firebase Error", firebaseError.toString());
-                                }
-                            });
-                        } else if (errorMessage != null) {
-                            Log.d("Error: ", "onPostExecute error");
+                            Log.d("Firebase: ", "Authenticated. Changing activity");
+                            login(email);
                         }
-                    }
-                };
-                task.execute();
+
+                        @Override
+                        public void onAuthenticationError(FirebaseError firebaseError) {
+                            Log.d("Firebase Error", firebaseError.toString());
+                        }
+                    });
+                } else if (errorMessage != null) {
+                    Log.d("Error: ", "onPostExecute error");
+                }
+            }
+        };
+        task.execute();
     }
 }

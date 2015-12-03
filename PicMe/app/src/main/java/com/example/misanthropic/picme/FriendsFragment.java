@@ -23,7 +23,7 @@ public class FriendsFragment extends Fragment {
 
     Firebase myFirebaseRef;
     MainActivity main = (MainActivity)getActivity();
-    String email = main.getUserEmail();
+    //String email = main.getUserEmail();
     private OnFragmentInteractionListener mListener;
 
     // TODO: Rename and change types and number of parameters

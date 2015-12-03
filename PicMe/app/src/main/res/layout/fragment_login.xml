@@ -37,4 +37,15 @@
         android:layout_gravity="center"
         android:layout_marginTop="125dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Ready To Share Some Pictures."
+        android:id="@+id/login_header"
+        android:layout_gravity="center_horizontal|top"
+        android:textColor="#3f7fff"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:layout_marginTop="100dp" />
+
 </FrameLayout>

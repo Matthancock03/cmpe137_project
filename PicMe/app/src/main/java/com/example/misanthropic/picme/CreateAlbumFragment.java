@@ -1,11 +1,11 @@
 package com.example.misanthropic.picme;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.firebase.client.Firebase;
 
@@ -33,7 +32,7 @@ public class CreateAlbumFragment extends Fragment {
     Firebase ref;
     Firebase album;
     MainActivity main = (MainActivity)getActivity();
-    String email = main.getUserEmail();
+    //String email = main.getUserEmail();
     EditText albumName;
     Button createButton;
 

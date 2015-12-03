@@ -21,8 +21,19 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateAlbum"
+            android:label="@string/title_activity_create_album"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AlbumView"
+            android:label="@string/title_activity_album_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PhotoView"
+            android:label="@string/title_activity_photo_view"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

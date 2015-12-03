@@ -1,17 +1,11 @@
 package com.example.misanthropic.picme;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.app.FragmentActivity;
 
 import com.firebase.client.Firebase;
 
-
-/**
+/*
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link AlbumViewFragment.OnFragmentInteractionListener} interface
@@ -19,15 +13,18 @@ import com.firebase.client.Firebase;
  * Use the {@link AlbumViewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AlbumViewFragment extends Fragment {
+public class AlbumViewFragment extends FragmentActivity {
 
     Firebase ref;
     Firebase user;
-    MainActivity main = (MainActivity)getActivity();
-    String email = main.getUserEmail();
+    //MainActivity main = (MainActivity)getActivity();
+    //String email = main.getUserEmail();
 
-    private OnFragmentInteractionListener mListener;
+    private int PICK_IMAGE_REQUEST = 1;
 
+    //private OnFragmentInteractionListener mListener;
+
+    /*
     public static AlbumViewFragment newInstance(String param1, String param2) {
         AlbumViewFragment fragment = new AlbumViewFragment();
         Bundle args = new Bundle();
@@ -37,30 +34,49 @@ public class AlbumViewFragment extends Fragment {
 
     public AlbumViewFragment() {
         // Required empty public constructor
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Firebase.setAndroidContext(getActivity());
+        //Firebase.setAndroidContext(getActivity());
         ref = new Firebase("https://PicMe.firebaseio.com/users");
         user = ref.child("users").child("email");
     }
 
+    /*
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_album_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_album_view, container, false);
+
+
+
+        // TODO: get images from Firebase
+
+
+
+        return view;
+
     }
 
+    public void uploadImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    /*
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
+    }*/
 
+    /*
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -88,9 +104,10 @@ public class AlbumViewFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+    /*
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
-    }
+    }*/
 
 }
