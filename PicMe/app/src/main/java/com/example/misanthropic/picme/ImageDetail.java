@@ -16,10 +16,10 @@ public class ImageDetail extends PhotoView {
 
         Intent i = getIntent();
 
-        int position = (Integer) i.getExtras().get("id");
-
+        int position = (Integer) i.getExtras().getInt("id");
         iv = (ImageView) findViewById(R.id.imageView);
         iv.setImageResource(ImageAdapter.Images[position]);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
