@@ -1,16 +1,24 @@
 package com.example.misanthropic.picme;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
+import android.view.View;
+import android.widget.Button;
 
 import java.io.ByteArrayOutputStream;
 
 //public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
 public class MainActivity extends FragmentActivity{
     //String userEmail = getIntent().getExtras().getString("USER_EMAIL","No Email");
+
+    private Button viewalbum;
+    private Button sharealbum;
+    private Button createalbum;
+    private Button friends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +28,33 @@ public class MainActivity extends FragmentActivity{
         //setSupportActionBar(toolbar);
         getIntent();
 
+        viewalbum = (Button) findViewById(R.id.view_album);
+        createalbum = (Button) findViewById(R.id.create_album);
+
+        viewalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartViewAlbumActivity();
+            }
+        });
+
+        createalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartCreateAlbumActivity();
+            }
+        });
+
+    }
+
+    public void StartCreateAlbumActivity(){
+        Intent GotoCreateAlbum = new Intent(this, CreateAlbum.class);
+        startActivity(GotoCreateAlbum);
+    }
+
+    public void StartViewAlbumActivity(){
+        Intent startViewAlbum = new Intent(this, AlbumView.class);
+        startActivity(startViewAlbum);
     }
 
     // Use this to convert image before saving to Firebase
