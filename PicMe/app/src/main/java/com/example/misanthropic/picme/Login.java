@@ -163,7 +163,7 @@ public class Login extends AppCompatActivity implements
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        //Log.d("Debug: ", result.getStatus().getStatusMessage());
+        Log.d("Debug: ", result.getStatus().getStatusMessage());
         if (result.isSuccess()) {
             final GoogleSignInAccount acct = result.getSignInAccount();
 
