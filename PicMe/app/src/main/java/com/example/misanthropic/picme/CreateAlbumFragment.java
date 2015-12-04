@@ -108,7 +108,7 @@ public class CreateAlbumFragment extends Fragment {
     public void createAlbum(View v){
         albumName = (EditText) v.findViewById(R.id.albumName);
         Log.d("Debug", albumName.toString());
-        //uploadImage();
+        uploadImage();
     }
 
     @Override

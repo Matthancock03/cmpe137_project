@@ -31,4 +31,6 @@
     <string name="title_activity_album_view">album_view</string>
     <string name="title_activity_photo_view">PhotoView</string>
     <string name="title_activity_image_detail">image_detail</string>
+    <string name="title_activity_albumtitle">albumtitle</string>
+    <string name="title_activity_upload_view">upload_view</string>
 </resources>

@@ -15,19 +15,24 @@ public class AlbumView extends FragmentActivity {
 
     private Button createAlbum;
     private Button deleteAlbum;
+    GridView gridview;
 
     final Integer [] myThumbs = {
-            R.mipmap.sample_2
+            R.mipmap.sample_10
+    };
+
+    final String [] Title = {
+        "Album1"
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_view);
-
+        gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this, myThumbs, Title));
         getIntent();
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
         createAlbum = (Button) findViewById(R.id.AddAlbum);
         deleteAlbum = (Button) findViewById(R.id.DeleteAlbum);
 
@@ -50,13 +55,13 @@ public class AlbumView extends FragmentActivity {
             }
         });
 
-        gridview.setAdapter(new ImageAdapter(this, myThumbs));
+
 
         gridview.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                //Toast.makeText(AlbumView.this, "" + position,
-                //        Toast.LENGTH_SHORT).show();
                 Intent gotoPhotos = new Intent(getApplicationContext(), PhotoView.class);
                 startActivity(gotoPhotos);
             }
