@@ -42,7 +42,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/albumName"
+        android:id="@+id/album_name"
         android:layout_gravity="center_horizontal|bottom"
         android:hint="Album Name"
         android:layout_marginBottom="125dp"

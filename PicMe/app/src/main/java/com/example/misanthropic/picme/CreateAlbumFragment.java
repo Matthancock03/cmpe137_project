@@ -22,15 +22,6 @@ import java.util.zip.Inflater;
 
 public class CreateAlbumFragment extends Fragment {
 
-    Firebase ref;
-    Firebase album;
-    MainActivity main = (MainActivity)getActivity(); // You can use this object to access methods and variables in Main Activity.
-    String email = main.getUserEmail();
-    EditText albumName;
-    Button createButton;
-
-    private int PICK_IMAGE_REQUEST = 1;
-
     private OnFragmentInteractionListener mListener;
 
     // TODO: Rename and change types and number of parameters
@@ -49,6 +40,7 @@ public class CreateAlbumFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -56,15 +48,6 @@ public class CreateAlbumFragment extends Fragment {
                              Bundle savedInstanceState) {
         Firebase.setAndroidContext(getActivity());
         View inflate = inflater.inflate(R.layout.fragment_create_album, container, false);
-        ref = new Firebase("https://PicMe.firebaseio.com/albums");
-        createButton = (Button) getActivity().findViewById(R.id.create_album);
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Create Album", "In click Listener");
-                createAlbum();
-            }
-        });
         return inflate;
     }
 
@@ -78,6 +61,7 @@ public class CreateAlbumFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Log.d("Create Fragment", "On Attach");
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -92,33 +76,6 @@ public class CreateAlbumFragment extends Fragment {
         mListener = null;
     }
 
-    public void uploadImage(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
-
-    public void createAlbum(){
-        albumName = (EditText) getActivity().findViewById(R.id.albumName);
-        Log.d("Debug", albumName.toString());
-        uploadImage();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == main.RESULT_OK && data != null && data.getData() != null) {
-            Uri uri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(main.getContentResolver(), uri);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * This interface must be implemented by activities that contain this
