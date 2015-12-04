@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal" />
+        android:src="@mipmap/create_album_image"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="250dp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Image Name"
+        android:id="@+id/textView2"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:textColor="#3f7fff"
+        android:textSize="30dp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments"
+        android:id="@+id/textView3"
+        android:layout_gravity="left|bottom|center"
+        android:textColor="#040000"
+        android:textSize="22dp"
+        android:textStyle="bold|italic"
+        android:layout_marginBottom="175dp"
+        android:layout_marginLeft="25dp" />
+
+</FrameLayout>
