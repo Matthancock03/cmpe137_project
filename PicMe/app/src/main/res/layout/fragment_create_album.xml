@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_gravity="center"
-        android:src="@mipmap/albumimage"
+        android:src="@mipmap/album_image"
         android:paddingLeft="15dp"
         android:paddingRight="15dp" />
 

@@ -13,7 +13,7 @@ public class PhotoView extends AppCompatActivity {
 
     final public Integer [] Thumbs = {R.mipmap.sample_10,
             R.mipmap.androidmarshmallow, R.mipmap.nfllogo,
-            R.mipmap.albumimage, R.mipmap.earthimage,
+            R.mipmap.album_image, R.mipmap.earthimage,
             R.mipmap.brocolli, R.mipmap.seagulf,
             R.mipmap.bball, R.mipmap.sample_7,
             R.mipmap.earthimage, R.mipmap.sample_1,
