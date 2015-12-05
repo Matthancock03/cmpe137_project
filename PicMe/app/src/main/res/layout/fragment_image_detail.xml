@@ -16,9 +16,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Image Name"
-        android:id="@+id/textView2"
+        android:id="@+id/image_name"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:textColor="#3f7fff"
         android:textSize="30dp"
         android:textStyle="bold|italic" />
@@ -32,7 +32,21 @@
         android:textColor="#040000"
         android:textSize="22dp"
         android:textStyle="bold|italic"
-        android:layout_marginBottom="175dp"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginBottom="150dp"
+        android:layout_marginStart="25dp"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/comment_input"
+        android:layout_gravity="center"
+        android:hint="Leave Comment"
+        android:layout_marginTop="75dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="139dp"
+        android:id="@+id/comment_list"
+        android:layout_gravity="bottom|center_horizontal" />
 
 </FrameLayout>

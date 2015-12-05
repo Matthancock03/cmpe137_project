@@ -48,6 +48,7 @@ public class Login extends AppCompatActivity implements
         View.OnClickListener {
 
     Firebase myFirebaseRef;
+    String name;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -60,45 +61,24 @@ public class Login extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        myFirebaseRef = new Firebase("https://PicMe.firebaseio.com/");
+        myFirebaseRef = new Firebase("https://PicMe.firebaseio.com");
 
         setContentView(R.layout.activity_login);
-
-        // Views
-        //mStatusTextView = (TextView) findViewById(R.id.status);
-
-        // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        //findViewById(R.id.sign_out_button).setOnClickListener(this);
-        //findViewById(R.id.disconnect_button).setOnClickListener(this);
 
-        // [START configure_signin]
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().requestProfile().requestId().requestIdToken(getString(R.string.server_client_ID))
                 .build();
-        // [END configure_signin]
 
-        // [START build_client]
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-        // [END build_client]
 
-        // [START customize_button]
-        // Customize sign-in button. The sign-in button can be displayed in
-        // multiple sizes and color schemes. It can also be contextually
-        // rendered based on the requested scopes. For example. a red button may
-        // be displayed when Google+ scopes are requested, but a white button
-        // may be displayed when only basic profile is requested. Try adding the
-        // Scopes.PLUS_LOGIN scope to the GoogleSignInOptions to see the
-        // difference.
+
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setScopes(gso.getScopeArray());
         // [END customize_button]
     }
@@ -126,24 +106,6 @@ public class Login extends AppCompatActivity implements
                 }
             });
 
-            /*
-            OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-            if (opr.isDone()) {
-                // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-                // and the GoogleSignInResult will be available instantly.
-                Log.d(TAG, "Got cached sign-in");
-                GoogleSignInResult result = opr.get();
-                handleSignInResult(result);
-            } else {
-                showProgressDialog();
-                opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                    @Override
-                    public void onResult(GoogleSignInResult googleSignInResult) {
-                        hideProgressDialog();
-                        handleSignInResult(googleSignInResult);
-                    }
-                });
-            }*/
         }
     }
 
@@ -163,10 +125,10 @@ public class Login extends AppCompatActivity implements
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        Log.d("Debug: ", result.getStatus().getStatusMessage());
+        //Log.d("Debug: ", result.getStatus().getStatusMessage());
         if (result.isSuccess()) {
             final GoogleSignInAccount acct = result.getSignInAccount();
-
+            name = acct.getDisplayName();
             Log.d("Login Status: ", "Successful Login");
             //Log.d("Email: ", result.getSignInAccount().getIdToken());
             try {
@@ -252,10 +214,11 @@ public class Login extends AppCompatActivity implements
         }
     }
 
-    public void login(String email) {
-        Log.d("USER_EMAIL", email);
+    public void login(String id) {
+        Log.d("USER_EMAIL", id);
         Bundle bundle = new Bundle();
-        bundle.putString("USER_EMAIL", email);
+        bundle.putString("USER_ID", id);
+        bundle.putString("NAME", name);
         Intent mainIntent = new Intent(this, MainActivity.class);
 
         mainIntent.putExtras(bundle);
@@ -269,6 +232,7 @@ public class Login extends AppCompatActivity implements
         getGoogleOAuthTokenAndLogin("Sample@gmail.com");
     }
 
+    // Async call to get google token for Firebase login.
     private void getGoogleOAuthTokenAndLogin(final String email) {
         /* Get OAuth token in Background */
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
@@ -303,6 +267,7 @@ public class Login extends AppCompatActivity implements
                 return token;
             }
 
+            // Executed on completion of Async getGoogleOAuthTokenAndLogin
             @Override
             protected void onPostExecute(String token) {
                 if (token != null) {
@@ -311,7 +276,10 @@ public class Login extends AppCompatActivity implements
                         public void onAuthenticated(AuthData authData) {
 
                             Log.d("Firebase: ", "Authenticated. Changing activity");
-                            login(email);
+                            myFirebaseRef.child("users").child(authData.getUid()).child("email").setValue(email);
+                            myFirebaseRef.child("users").child(authData.getUid()).child("permissions").setValue(email);
+
+                            login(authData.getUid());
                         }
 
                         @Override
