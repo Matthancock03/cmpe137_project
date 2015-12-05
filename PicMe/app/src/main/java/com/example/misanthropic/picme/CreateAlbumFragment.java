@@ -99,10 +99,12 @@ public class CreateAlbumFragment extends Fragment {
     }
 
     public void uploadImage(){
+
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
     }
 
     public void createAlbum(View v){

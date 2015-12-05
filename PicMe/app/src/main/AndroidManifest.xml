@@ -40,11 +40,11 @@
             android:label="@string/title_activity_image_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".albumtitle"
+            android:name=".Albumtitle"
             android:label="@string/title_activity_albumtitle"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".upload_view"
+            android:name=".Upload_View"
             android:label="@string/title_activity_upload_view"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

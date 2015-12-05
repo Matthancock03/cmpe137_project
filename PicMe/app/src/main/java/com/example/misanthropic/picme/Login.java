@@ -14,15 +14,15 @@ import com.firebase.simplelogin.FirebaseSimpleLoginUser;
 import com.firebase.simplelogin.SimpleLogin;
 import com.firebase.simplelogin.SimpleLoginAuthenticatedHandler;
 
-
 public class Login extends AppCompatActivity //implements
        /* GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener*/ {
-
     private EditText user;
     private EditText pass;
     private Button login;
     private Button createuser;
+
+    public static String email;
 
     public SimpleLogin authClient;
 
@@ -34,6 +34,21 @@ public class Login extends AppCompatActivity //implements
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;*/
+
+    public class Acc {
+        private String email;
+
+        public Acc() {}
+
+        public Acc(String email){
+            this.email = email;
+        }
+
+        public String getemail(){
+            return email;
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +124,8 @@ public class Login extends AppCompatActivity //implements
                 @Override
                 public void onClick(View v) {
                     login();
+                    email = user.getText().toString();
+                    //Toast.makeText(getApplicationContext(), ""+email, Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -116,8 +133,15 @@ public class Login extends AppCompatActivity //implements
                 @Override
                 public void onClick(View v) {
                     createuser();
+                    Firebase newaccref = myFirebaseRef.child("Email");
+                    Acc newacc = new Acc(user.getText().toString());
+                    newaccref.push().setValue(newacc);
                 }
             });
+
+
+
+
 
             /*
             OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
@@ -279,9 +303,10 @@ public class Login extends AppCompatActivity //implements
             public void authenticated(FirebaseSimpleLoginError error, FirebaseSimpleLoginUser user) {
                 if(error != null) {
                     Toast.makeText(Login.this, "Username is taken", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Toast.makeText(Login.this, "New Account created", Toast.LENGTH_SHORT).show();
+
+
                 }
             }
         });

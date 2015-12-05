@@ -42,7 +42,7 @@ public class PhotoView extends AppCompatActivity {
         addphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoUploadView = new Intent(getApplicationContext(), upload_view.class);
+                Intent gotoUploadView = new Intent(getApplicationContext(), Upload_View.class);
                 startActivity(gotoUploadView);
             }
         });

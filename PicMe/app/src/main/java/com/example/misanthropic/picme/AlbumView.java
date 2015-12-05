@@ -2,8 +2,6 @@ package com.example.misanthropic.picme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,17 +34,6 @@ public class AlbumView extends FragmentActivity {
         createAlbum = (Button) findViewById(R.id.AddAlbum);
         deleteAlbum = (Button) findViewById(R.id.DeleteAlbum);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         createAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
