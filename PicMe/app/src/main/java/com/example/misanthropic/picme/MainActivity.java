@@ -18,7 +18,7 @@ import java.io.ByteArrayOutputStream;
 //public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
 public class MainActivity extends FragmentActivity{
 
-    String userId;
+    String email;
     String name;
     private Button viewalbum;
     private Button sharealbum;
@@ -64,9 +64,9 @@ public class MainActivity extends FragmentActivity{
 
     public void StartCreateAlbumActivity(){
         Intent GotoCreateAlbum = new Intent(this, CreateAlbum.class);
-        if(userId != null && name != null) {
+        if(email != null && name != null) {
             Bundle bundle = new Bundle();
-            bundle.putString("USER_ID", userId);
+            bundle.putString("USER_EMAIL", email);
             bundle.putString("USER_NAME", name);
             GotoCreateAlbum.putExtras(bundle);
         }
@@ -75,9 +75,9 @@ public class MainActivity extends FragmentActivity{
 
     public void StartViewAlbumActivity(){
         Intent startViewAlbum = new Intent(this, AlbumView.class);
-        if(userId != null && name != null) {
+        if(email != null && name != null) {
             Bundle bundle = new Bundle();
-            bundle.putString("USER_ID", userId);
+            bundle.putString("USER_EMAIL", email);
             bundle.putString("USER_NAME", name);
             startViewAlbum.putExtras(bundle);
         }
@@ -118,17 +118,17 @@ public class MainActivity extends FragmentActivity{
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-    public String getUserId(){
-        return userId;
+    public String getEmail(){
+        return email;
     }
 
     public void unpackBundle(){
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        if(!extras.isEmpty() && extras.containsKey("USER_ID")){
+        if(!extras.isEmpty() && extras.containsKey("USER_EMAIL")){
             TextView text = (TextView)findViewById(R.id.displayHeader);
-            userId = extras.getString("USER_ID");
-            Log.d("Id in Main", userId);
+            email = extras.getString("USER_EMAIL");
+            Log.d("Email in Main", email);
             if(extras.containsKey("NAME")){
                 name = extras.getString("NAME");
                 text.setText(text.getText() + " " + name);

@@ -2,6 +2,7 @@ package com.example.misanthropic.picme;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,7 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
@@ -22,10 +25,13 @@ public class CreateAlbum extends FragmentActivity {
     Firebase ref;
     Firebase albums;
     Firebase imageRef;
-    String userId;
+    String email;
     String name;
     EditText albumName;
     Button createButton;
+    Button upload;
+    Bitmap yourSelectedImage;
+    String image64;
 
     private int PICK_IMAGE_REQUEST = 1;
 
@@ -49,15 +55,24 @@ public class CreateAlbum extends FragmentActivity {
             }
         });
         albumName = (EditText)findViewById(R.id.album_name);
+
+        upload = (Button) findViewById(R.id.select_image);
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getImage();
+            }
+        });
     }
 
     public void unpackBundle(){
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        if(!extras.isEmpty() && extras.containsKey("USER_ID")){
+        if(!extras.isEmpty() && extras.containsKey("USER_EMAIL")){
             TextView text = (TextView)findViewById(R.id.displayHeader);
-            userId = extras.getString("USER_ID");
-            Log.d("CreateAlbum: ID ", userId);
+            email = extras.getString("USER_EMAIL");
+            Log.d("CreateAlbum: ID ", email);
             if(extras.containsKey("NAME")){
                 name = extras.getString("NAME");
                 text.setText(text.getText() + " " + name);
@@ -72,20 +87,34 @@ public class CreateAlbum extends FragmentActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    public void saveImage(String image){
-        //Log.d("Image Converted", image);
-        String album = albumName.getText().toString();
-        Log.d("Album Name", album);
-        ref = albums.child(userId).child("albums").push();
-        ref.child("album_name").setValue(album);
-        imageRef = ref.child("images").push();
-        imageRef.setValue(image);
+    public void setImage(){
+        ImageView imgView = (ImageView) findViewById(R.id.album_create_image);
+        // Set the Image in ImageView after decoding the String
+        imgView.setImageBitmap(yourSelectedImage);
     }
 
     public void createAlbum(){
+        //Log.d("Image Converted", image);
+        if(image64 != null) {
+            String album = albumName.getText().toString();
+            Log.d("Album Name", album);
+            ref = albums.child(email).child("albums").push();
+            ref.child("album_name").setValue(album);
+            imageRef = ref.child("images").push();
+            imageRef.setValue(image64);
 
-        Log.d("Create Album:album name", albumName.toString());
-        getImage();
+            Intent startViewAlbum = new Intent(this, AlbumView.class);
+            Bundle bundle = new Bundle();
+
+            if(email != null && name != null) {
+                bundle.putString("USER_EMAIL", email);
+                bundle.putString("USER_NAME", name);
+            }
+            startViewAlbum.putExtras(bundle);
+            startActivity(startViewAlbum);
+        }else{
+            Toast.makeText(this, "Image not selected.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -95,10 +124,10 @@ public class CreateAlbum extends FragmentActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                bitmap = MainActivity.getResizedBitmap(bitmap, 500);
-                String image64 = MainActivity.bitmapToBase64(bitmap);
-                saveImage(image64);
+                yourSelectedImage = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                yourSelectedImage = MainActivity.getResizedBitmap(yourSelectedImage, 500);
+                image64 = MainActivity.bitmapToBase64(yourSelectedImage);
+                setImage();
 
             } catch (IOException e) {
                 e.printStackTrace();

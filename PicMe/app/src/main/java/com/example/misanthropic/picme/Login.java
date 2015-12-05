@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity implements
 
     Firebase myFirebaseRef;
     String name;
+    String email;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -56,6 +57,21 @@ public class Login extends AppCompatActivity implements
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
     private boolean mGoogleIntentInProgress;
+
+    public class Acc {
+        private String email;
+
+        public Acc() {}
+
+        public Acc(String email){
+            this.email = email;
+        }
+
+        public String getemail(){
+            return email;
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +116,7 @@ public class Login extends AppCompatActivity implements
             showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
+
                 public void onResult(GoogleSignInResult googleSignInResult) {
                     hideProgressDialog();
                     handleSignInResult(googleSignInResult);
@@ -129,10 +146,11 @@ public class Login extends AppCompatActivity implements
         if (result.isSuccess()) {
             final GoogleSignInAccount acct = result.getSignInAccount();
             name = acct.getDisplayName();
+            email = acct.getEmail();
             Log.d("Login Status: ", "Successful Login");
-            //Log.d("Email: ", result.getSignInAccount().getIdToken());
+            Log.d("Email: ", result.getSignInAccount().getIdToken());
             try {
-                getGoogleOAuthTokenAndLogin(acct.getEmail());
+                getGoogleOAuthTokenAndLogin();
             }catch(Exception e){
                 Log.d("Exception on Get Token", e.toString());
             }
@@ -217,7 +235,7 @@ public class Login extends AppCompatActivity implements
     public void login(String id) {
         Log.d("USER_EMAIL", id);
         Bundle bundle = new Bundle();
-        bundle.putString("USER_ID", id);
+        bundle.putString("USER_EMAIL", email);
         bundle.putString("NAME", name);
         Intent mainIntent = new Intent(this, MainActivity.class);
 
@@ -229,11 +247,11 @@ public class Login extends AppCompatActivity implements
     public void onConnected(final Bundle bundle) {
         /* Connected with Google API, use this to authenticate with Firebase */
         Log.d("ON Connected", "Connected");
-        getGoogleOAuthTokenAndLogin("Sample@gmail.com");
+        getGoogleOAuthTokenAndLogin();
     }
 
     // Async call to get google token for Firebase login.
-    private void getGoogleOAuthTokenAndLogin(final String email) {
+    private void getGoogleOAuthTokenAndLogin() {
         /* Get OAuth token in Background */
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             String errorMessage = null;
@@ -274,7 +292,7 @@ public class Login extends AppCompatActivity implements
                     myFirebaseRef.authWithOAuthToken("google", token, new Firebase.AuthResultHandler() {
                         @Override
                         public void onAuthenticated(AuthData authData) {
-
+                            email = email.replaceAll("\\." , ",");
                             Log.d("Firebase: ", "Authenticated. Changing activity");
                             myFirebaseRef.child("users").child(authData.getUid()).child("email").setValue(email);
                             myFirebaseRef.child("users").child(authData.getUid()).child("permissions").setValue(email);
@@ -289,6 +307,7 @@ public class Login extends AppCompatActivity implements
                     });
                 } else if (errorMessage != null) {
                     Log.d("Error: ", "onPostExecute error");
+
                 }
             }
         };

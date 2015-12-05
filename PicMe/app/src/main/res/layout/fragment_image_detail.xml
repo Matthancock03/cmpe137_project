@@ -5,8 +5,8 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:id="@+id/imageView"
         android:src="@mipmap/create_album_image"
         android:layout_gravity="center_horizontal"
@@ -50,3 +50,4 @@
         android:layout_gravity="bottom|center_horizontal" />
 
 </FrameLayout>
+

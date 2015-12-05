@@ -6,15 +6,15 @@
 
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="425dp"
-        android:layout_alignParentTop="true"
-        android:layout_below="@+id/AddAlbum"
+        android:layout_height="500dp"
         android:id="@+id/gridview"
-        android:columnWidth="90dp"
+        android:columnWidth="100dp"
         android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
+        android:verticalSpacing="5dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
+        android:focusable="true"
+        android:clickable="true"
         tools:context="com.example.misanthropic.picme.AlbumViewFragment">
     </GridView>
 
