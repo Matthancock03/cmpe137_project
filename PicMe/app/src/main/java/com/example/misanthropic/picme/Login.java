@@ -142,7 +142,6 @@ public class Login extends AppCompatActivity implements
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        //Log.d("Debug: ", result.getStatus().getStatusMessage());
         if (result.isSuccess()) {
             final GoogleSignInAccount acct = result.getSignInAccount();
             name = acct.getDisplayName();
@@ -155,7 +154,7 @@ public class Login extends AppCompatActivity implements
                 Log.d("Exception on Get Token", e.toString());
             }
         } else {
-            // Signed out, show unauthenticated UI.
+            Log.d("Debug: ", result.getStatus().getStatusMessage());
             updateUI(false);
         }
     }

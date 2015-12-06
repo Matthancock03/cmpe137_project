@@ -34,7 +34,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return (Titles == null)?albumNames.size() : Titles.length;
+        return (Titles == null)?albumNames.size(): Titles.length;
     }
 
     public Object getItem(int position) {
