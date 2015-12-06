@@ -25,13 +25,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class AlbumView extends FragmentActivity {
-    ArrayList<Album> albumArray = new ArrayList<>();
-    ArrayList<Bitmap> albumCovers = new ArrayList<>();
-    ArrayList<String> albumNames = new ArrayList<>();
+
     String email;
     String name;
-    Firebase ref;
-    Firebase albums;
+    AlbumsHolder holder;
     private Button createAlbum;
     private Button deleteAlbum;
     GridView gridview;
@@ -50,12 +47,10 @@ public class AlbumView extends FragmentActivity {
         setContentView(R.layout.activity_album_view);
 
         Firebase.setAndroidContext(this);
-        albums = new Firebase("https://PicMe.firebaseio.com/albums");
-        ref = new Firebase("https://PicMe.firebaseio.com/");
         unpackBundle(); // Pulls data passed from other activities out of Bundles
-
+        holder = AlbumsHolder.getInstance();
         gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this, albumCovers, albumNames));
+        gridview.setAdapter(new ImageAdapter(this, holder.albumCovers, holder.albumNames));
 
 
         createAlbum = (Button) findViewById(R.id.AddAlbum);
@@ -97,7 +92,6 @@ public class AlbumView extends FragmentActivity {
         Bundle extras = intent.getExtras();
         if(extras!= null && !extras.isEmpty() && extras.containsKey("USER_EMAIL")){
             email = extras.getString("USER_EMAIL");
-            populateAlbums();
             Log.d("Id Album View", email);
             if(extras.containsKey("NAME")){
                 name = extras.getString("NAME");
@@ -105,50 +99,5 @@ public class AlbumView extends FragmentActivity {
         }
     }
 
-    public void populateAlbums(){
-        Query query = albums.child(email).child("albums").orderByKey();
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
-                Log.d("AlbumView Firebase Key", snapshot.getKey());
-                Album albm = new Album();
-                DataSnapshot albumNme = snapshot.child("album_name");
-                DataSnapshot imageArray = snapshot.child("images");
-
-                Iterable<DataSnapshot> iterable = imageArray.getChildren();
-                Iterator<DataSnapshot> it = iterable.iterator();
-                int count = 0;
-
-                while(it.hasNext()){
-
-                    DataSnapshot img = (DataSnapshot)it.next();
-                    //Log.d(img.getKey(), img.getValue().toString());
-                    albm.images.put(Integer.parseInt(img.getKey()), img.getValue().toString());
-                    if(count == 0){
-                        albumCovers.add(MainActivity.base64ToBitmap(img.getValue().toString()));
-                        albumNames.add(albumNme.getValue().toString());
-                        Log.d("AlbumView albumName: ", albumNme.getValue().toString());
-                    }
-                    count++;
-                }
-
-            }
-
-            public void onChildRemoved(DataSnapshot snapshot){
-                Log.d("AlbumView Firebase Key", snapshot.getKey());
-            }
-
-            public void onChildChanged(DataSnapshot snapshot, String str){
-                Log.d("AlbumView Firebase Key", snapshot.getKey());
-            }
-            public void onChildMoved(DataSnapshot snapshot, String str){
-                Log.d("AlbumView Firebase Key", snapshot.getKey());
-            }
-
-            public void onCancelled(FirebaseError error){
-                Log.d("Firebase Error", error.toString());
-            }
-        });
-    }
 
 }

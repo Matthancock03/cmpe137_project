@@ -11,13 +11,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 //public class MainActivity extends AppCompatActivity implements CreateAlbumFragment.OnFragmentInteractionListener{
 public class MainActivity extends FragmentActivity{
 
+    Firebase ref;
+    Firebase albums;
+    AlbumsHolder holder;
+    HashMap<String, Album> albumMap = new HashMap<>();
+    ArrayList<Bitmap> albumCovers = new ArrayList<>();
+    ArrayList<String> albumNames = new ArrayList<>();
     String email;
     String name;
     private Button viewalbum;
@@ -28,9 +41,14 @@ public class MainActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        unpackBundle(); // Pulls data passed from other activities out of Bundles
         Firebase.setAndroidContext(this);
-
+        albums = new Firebase("https://PicMe.firebaseio.com/albums");
+        ref = new Firebase("https://PicMe.firebaseio.com/");
+        unpackBundle(); // Pulls data passed from other activities out of Bundles
+        holder = AlbumsHolder.getInstance();
+        this.albumMap = holder.albumMap;
+        this.albumCovers = holder.albumCovers;
+        this.albumNames  = holder.albumNames;
 
         viewalbum = (Button) findViewById(R.id.view_album);
 
@@ -130,10 +148,59 @@ public class MainActivity extends FragmentActivity{
             TextView text = (TextView)findViewById(R.id.displayHeader);
             email = extras.getString("USER_EMAIL");
             Log.d("Email in Main", email);
+            populateAlbums();
             if(extras.containsKey("NAME")){
                 name = extras.getString("NAME");
                 text.setText(text.getText() + " " + name);
             }
         }
     }
+
+    public void populateAlbums(){
+        Query query = albums.child(email).child("albums").orderByKey();
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChild) {
+                Log.d("AlbumView Firebase Key", snapshot.getKey());
+                String albumKey = snapshot.getKey();
+                Album albm = new Album();
+                DataSnapshot albumNme = snapshot.child("album_name");
+                DataSnapshot imageArray = snapshot.child("images");
+
+                Iterable<DataSnapshot> iterable = imageArray.getChildren();
+                Iterator<DataSnapshot> it = iterable.iterator();
+                int count = 0;
+
+                while(it.hasNext()){
+
+                    DataSnapshot img = (DataSnapshot)it.next();
+                    //Log.d(img.getKey(), img.getValue().toString());
+                    albm.images.put(Integer.parseInt(img.getKey()), img.getValue().toString());
+                    if(count == 0){
+                        albumCovers.add(MainActivity.base64ToBitmap(img.getValue().toString()));
+                        albumNames.add(albumNme.getValue().toString());
+                        Log.d("AlbumView albumName: ", albumNme.getValue().toString());
+                    }
+                    count++;
+                }
+                albumMap.put(albumKey, albm);
+            }
+
+            public void onChildRemoved(DataSnapshot snapshot){
+                Log.d("AlbumView Firebase Key", snapshot.getKey());
+            }
+
+            public void onChildChanged(DataSnapshot snapshot, String str){
+                Log.d("AlbumView Firebase Key", snapshot.getKey());
+            }
+            public void onChildMoved(DataSnapshot snapshot, String str){
+                Log.d("AlbumView Firebase Key", snapshot.getKey());
+            }
+
+            public void onCancelled(FirebaseError error){
+                Log.d("Firebase Error", error.toString());
+            }
+        });
+    }
+
 }
