@@ -64,23 +64,24 @@ public class MainActivity extends FragmentActivity{
 
     public void StartCreateAlbumActivity(){
         Intent GotoCreateAlbum = new Intent(this, CreateAlbum.class);
+        Bundle bundle = new Bundle();
+
         if(email != null && name != null) {
-            Bundle bundle = new Bundle();
             bundle.putString("USER_EMAIL", email);
             bundle.putString("USER_NAME", name);
-            GotoCreateAlbum.putExtras(bundle);
         }
+        GotoCreateAlbum.putExtras(bundle);
         startActivity(GotoCreateAlbum);
     }
 
     public void StartViewAlbumActivity(){
         Intent startViewAlbum = new Intent(this, AlbumView.class);
+        Bundle bundle = new Bundle();
         if(email != null && name != null) {
-            Bundle bundle = new Bundle();
             bundle.putString("USER_EMAIL", email);
             bundle.putString("USER_NAME", name);
-            startViewAlbum.putExtras(bundle);
         }
+        startViewAlbum.putExtras(bundle);
         startActivity(startViewAlbum);
     }
 

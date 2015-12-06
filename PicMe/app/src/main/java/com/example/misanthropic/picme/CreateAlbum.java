@@ -22,6 +22,7 @@ import com.firebase.client.Firebase;
 import java.io.IOException;
 
 public class CreateAlbum extends FragmentActivity {
+    Album albumObject;
     Firebase ref;
     Firebase albums;
     Firebase imageRef;
@@ -97,19 +98,18 @@ public class CreateAlbum extends FragmentActivity {
         //Log.d("Image Converted", image);
         if(image64 != null) {
             String album = albumName.getText().toString();
-            Log.d("Album Name", album);
+            albumObject = new Album();
+            albumObject.album_name = album;
+            albumObject.images.put(albumObject.images.size() + 1, image64);
             ref = albums.child(email).child("albums").push();
-            ref.child("album_name").setValue(album);
-            imageRef = ref.child("images").push();
-            imageRef.setValue(image64);
+            ref.setValue(albumObject);
+
 
             Intent startViewAlbum = new Intent(this, AlbumView.class);
             Bundle bundle = new Bundle();
-
-            if(email != null && name != null) {
                 bundle.putString("USER_EMAIL", email);
                 bundle.putString("USER_NAME", name);
-            }
+
             startViewAlbum.putExtras(bundle);
             startActivity(startViewAlbum);
         }else{
