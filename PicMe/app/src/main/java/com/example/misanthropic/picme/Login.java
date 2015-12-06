@@ -102,8 +102,9 @@ public class Login extends AppCompatActivity implements
     @Override
     public void onStart() {
         super.onStart();
-
+        /*
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+
         if (opr.isDone()) {
             // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
             // and the GoogleSignInResult will be available instantly.
@@ -124,6 +125,7 @@ public class Login extends AppCompatActivity implements
             });
 
         }
+        */
     }
 
     // [START onActivityResult]
@@ -154,7 +156,7 @@ public class Login extends AppCompatActivity implements
                 Log.d("Exception on Get Token", e.toString());
             }
         } else {
-            Log.d("Debug: ", result.getStatus().getStatusMessage());
+            Log.d("Debug: ", result.getStatus().toString());
             updateUI(false);
         }
     }
@@ -164,6 +166,7 @@ public class Login extends AppCompatActivity implements
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
     // [END signIn]
 
