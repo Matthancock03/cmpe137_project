@@ -348,6 +348,8 @@ public class Login extends AppCompatActivity implements
         String eml = user.getText().toString();
         eml = eml.replaceAll("\\.", ",");
         Log.d("GoToActivity Email", eml);
+        myFirebaseRef.child("users").child(eml).child("email").setValue(email);
+        myFirebaseRef.child("users").child(eml).child("permissions").setValue(email);
         Bundle bundle = new Bundle();
         bundle.putString("USER_EMAIL", eml);
         i.putExtras(bundle);
