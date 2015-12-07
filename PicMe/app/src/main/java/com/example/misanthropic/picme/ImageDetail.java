@@ -25,8 +25,6 @@ public class ImageDetail extends AppCompatActivity {
     ArrayList<String> comments;
     EditText comment_field;
     ArrayAdapter adapter;
-    String image;
-
     String[] testValues = new String[] { "Android", "iPhone", "WindowsMobile",
             "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
             "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
@@ -37,19 +35,10 @@ public class ImageDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_detail);
 
-        unpackBundle();
+        //unpackBundle();
 
         iv = (ImageView) findViewById(R.id.imageView);
-        iv.setImageBitmap(MainActivity.base64ToBitmap(image));
-
-        //Set up Firebase
-        Firebase.setAndroidContext(this);
-
-        /*/ Get Comments ListView and set adapter
-        comments_holder = (ListView)findViewById(R.id.comment_list);
-        adapter = new ArrayAdapter<String>(this,R.layout.fragment_image_detail , testValues); // Used to dynamically update view on data change.
-        comments_holder.setAdapter(adapter);
-        /*/
+        iv.setImageBitmap(MainActivity.base64ToBitmap(AlbumsHolder.tempImage));
 
     }
 
@@ -68,10 +57,8 @@ public class ImageDetail extends AppCompatActivity {
     public void unpackBundle(){
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        Log.d("Photo Detail", "Init");
 
         if(extras!= null){
-            image = extras.getString("IMAGE");
         }
     }
 }

@@ -76,22 +76,10 @@ public class Upload_View extends AppCompatActivity {
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
                 // Get the Image from data
 
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-                // Get the cursor
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                // Move to first row
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
+                Uri uri = data.getData();
+                yourSelectedImage = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 ImageView imgView = (ImageView) findViewById(R.id.imgView);
                 // Set the Image in ImageView after decoding the String
-
-                yourSelectedImage = BitmapFactory.decodeFile(imgDecodableString);
                 yourSelectedImage = MainActivity.getResizedBitmap(yourSelectedImage, 500);
                 imgView.setImageBitmap(yourSelectedImage);
 

@@ -50,9 +50,10 @@ public class PhotoView extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent gotoImageDetail = new Intent(getApplicationContext(), ImageDetail.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("IMAGE", holder.albumMap.get(albumKey).images.get(position));
-                gotoImageDetail.putExtras(bundle);
+                    Bundle bundle = new Bundle();
+                    AlbumsHolder.tempImage = holder.albumMap.get(albumKey).images.get(position);
+                    gotoImageDetail.putExtras(bundle);
+                Log.d("Gridview Listener", "In Listener");
                 startActivity(gotoImageDetail);
             }
         });

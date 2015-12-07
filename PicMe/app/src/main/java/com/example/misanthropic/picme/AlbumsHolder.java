@@ -15,7 +15,7 @@ public class AlbumsHolder {
     public static ArrayList<String> keys = new ArrayList<>();
     public static ArrayList<Bitmap> albumCovers = new ArrayList<>();
     public static ArrayList<String> albumNames = new ArrayList<>();
-
+    public static String tempImage;
     private static final AlbumsHolder holder = new AlbumsHolder();
 
     public static AlbumsHolder getInstance() {return holder;}
