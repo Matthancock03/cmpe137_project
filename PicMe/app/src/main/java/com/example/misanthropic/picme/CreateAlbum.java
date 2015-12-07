@@ -46,7 +46,8 @@ public class CreateAlbum extends FragmentActivity {
         ref = new Firebase("https://PicMe.firebaseio.com/");
         createButton = (Button) findViewById(R.id.create_album);
         Log.d("Create Album", "In onCreate");
-
+        AlbumsHolder holder = AlbumsHolder.getInstance();
+        email = holder.email;
         unpackBundle();
 
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -70,15 +71,6 @@ public class CreateAlbum extends FragmentActivity {
     public void unpackBundle(){
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        if(!extras.isEmpty() && extras.containsKey("USER_EMAIL")){
-            TextView text = (TextView)findViewById(R.id.displayHeader);
-            email = extras.getString("USER_EMAIL");
-            Log.d("CreateAlbum: ID ", email);
-            if(extras.containsKey("NAME")){
-                name = extras.getString("NAME");
-                text.setText(text.getText() + " " + name);
-            }
-        }
     }
 
     public void getImage(){
