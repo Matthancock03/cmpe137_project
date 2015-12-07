@@ -27,7 +27,8 @@ public class MainActivity extends FragmentActivity{
 
     Firebase ref;
     Firebase albums;
-    AlbumsHolder holder;
+    AlbumsHolder holder  = AlbumsHolder.getInstance();
+
     HashMap<String, Album> albumMap = new HashMap<>();
     HashMap<String, Bitmap> albumKeysAndImages = new HashMap<>();
     ArrayList<Bitmap> albumCovers = new ArrayList<>();
@@ -46,7 +47,6 @@ public class MainActivity extends FragmentActivity{
         albums = new Firebase("https://PicMe.firebaseio.com/albums");
         ref = new Firebase("https://PicMe.firebaseio.com/");
         unpackBundle(); // Pulls data passed from other activities out of Bundles
-        holder = AlbumsHolder.getInstance();
         this.albumMap = holder.albumMap;
         this.albumKeysAndImages = holder.albumKeysAndCovers;
         this.albumCovers = holder.albumCovers;
@@ -151,8 +151,11 @@ public class MainActivity extends FragmentActivity{
             TextView text = (TextView)findViewById(R.id.displayHeader);
             email = extras.getString("USER_EMAIL");
             Log.d("Email in Main", email);
-            holder.email = email;
-            populateAlbums();
+
+            if(holder.albumCovers.isEmpty()) {
+                holder.email = email;
+                populateAlbums();
+            }
             if(extras.containsKey("NAME")){
                 name = extras.getString("NAME");
                 text.setText(text.getText() + " " + name);

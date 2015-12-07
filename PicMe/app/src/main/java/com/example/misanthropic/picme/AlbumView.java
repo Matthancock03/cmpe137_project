@@ -71,6 +71,9 @@ public class AlbumView extends FragmentActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 Intent gotoPhotos = new Intent(getApplicationContext(), PhotoView.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ALBUM_KEY", "TEST");
+                bundle.putString("INDEX", "TEST");
                 startActivity(gotoPhotos);
             }
         });

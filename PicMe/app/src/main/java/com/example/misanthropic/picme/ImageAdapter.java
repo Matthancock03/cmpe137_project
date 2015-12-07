@@ -16,9 +16,10 @@ import java.util.ArrayList;
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    AlbumsHolder holder = AlbumsHolder.getInstance();
     public static Integer [] Images;
-    public ArrayList<Bitmap> images = new ArrayList<>();
-    public ArrayList<String> albumNames = new ArrayList<>();
+    public ArrayList<Bitmap> images = holder.albumCovers;
+    public ArrayList<String> albumNames = holder.albumNames;
     public static String [] Titles;
 
     public ImageAdapter(Context c, Integer [] Image, String [] Title) {
@@ -38,11 +39,11 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        return position;
+        return null;
     }
 
     public long getItemId(int position) {
-        return position;
+        return 0;
     }
 
     // create a new ImageView for each item referenced by the Adapter

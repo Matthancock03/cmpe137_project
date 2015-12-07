@@ -11,6 +11,8 @@ import android.widget.GridView;
 
 public class PhotoView extends AppCompatActivity {
 
+    AlbumsHolder holder = AlbumsHolder.getInstance();
+
     final public Integer [] Thumbs = {R.mipmap.sample_10,
             R.mipmap.androidmarshmallow, R.mipmap.nfllogo,
             R.mipmap.album_image, R.mipmap.earthimage,
@@ -30,6 +32,7 @@ public class PhotoView extends AppCompatActivity {
     Button addphoto;
     Button deletephoto;
     public String albumKey;
+    public String index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class PhotoView extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 if (albumKey != null) {
                     bundle.putString("AlbumKey", albumKey);
+                    bundle.putString("INDEX", index);
                 }
                 gotoUploadView.putExtras(bundle);
                 startActivity(gotoUploadView);
@@ -56,7 +60,7 @@ public class PhotoView extends AppCompatActivity {
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
 
-        gridview.setAdapter(new ImageAdapter(this, Thumbs, PicTitle));
+        gridview.setAdapter(new ImageAdapter(this, holder.albumCovers, holder.albumNames));
 
         gridview.setOnItemClickListener(new OnItemClickListener() {
             @Override

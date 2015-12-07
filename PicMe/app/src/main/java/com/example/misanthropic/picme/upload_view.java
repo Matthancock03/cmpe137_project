@@ -12,9 +12,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -25,8 +27,10 @@ public class Upload_View extends AppCompatActivity {
 
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
+    String index;
     Firebase ref;
-
+    String albumKey;
+    AlbumsHolder holder;
     public Bitmap yourSelectedImage;
 
     Button upload;
@@ -35,9 +39,9 @@ public class Upload_View extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_view);
-
-        AlbumsHolder holder = AlbumsHolder.getInstance();
-        ref = new Firebase("https://shining-heat-4056.firebaseio.com/albums/" + holder.email + "/albums");
+        unpackBundle();
+        holder = AlbumsHolder.getInstance();
+        ref = new Firebase("https://PicMe.firebaseio.com/albums/" + holder.email + "/albums/" + albumKey);
 
         upload = (Button) findViewById(R.id.upload);
 
@@ -45,8 +49,8 @@ public class Upload_View extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Implement upload functionality
-                Firebase upload = ref.child("Email").child("-K4kgQJeLE5z18clVq82").child("album");
-                upload.push().setValue(bitmapToBase64(yourSelectedImage));
+                //Firebase upload = ref.child("Email").child("-K4kgQJeLE5z18clVq82").child("album");
+                ref.child(index).setValue(bitmapToBase64(yourSelectedImage));
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -111,6 +115,21 @@ public class Upload_View extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
+    public void unpackBundle(){
+        Intent i = getIntent();
+        Bundle extras = i.getExtras();
+        if(!extras.isEmpty() && extras.containsKey("ALBUM_KEY")){
+            albumKey = extras.getString("ALBUM_KEY");
+            index = extras.getString("INDEX");
+        }else{
+            Intent GotoCreateAlbum = new Intent(this, CreateAlbum.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("USER_EMAIL", holder.email);
+            //bundle.putString("USER_NAME", "");
 
+            GotoCreateAlbum.putExtras(bundle);
+            startActivity(GotoCreateAlbum);
+        }
+    }
 
 }
