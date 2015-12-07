@@ -12,26 +12,31 @@
     </ImageView>
 
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonLoadPicture"
         android:layout_weight="0"
         android:onClick="loadImagefromGallery"
         android:text="Choose Photo"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="72dp">
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/upload"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp">
     </Button>
 
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/upload"
         android:layout_weight="0"
         android:text="Upload"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="31dp" />
+        android:layout_alignStart="@+id/buttonLoadPicture" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,5 +45,21 @@
         android:layout_above="@+id/buttonLoadPicture"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Choose a Photo to Upload"
+        android:layout_marginTop="34dp"
+        android:editable="false"
+        android:gravity="center_horizontal"
+        android:textSize="55dp"
+        android:textStyle="bold|italic"
+        android:textColor="#3f7fff"
+        android:singleLine="false"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

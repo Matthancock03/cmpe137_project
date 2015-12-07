@@ -2,29 +2,23 @@ package com.example.misanthropic.picme;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
 import java.io.ByteArrayOutputStream;
 
-public class Upload_View extends AppCompatActivity {
+public class upload_view extends AppCompatActivity {
 
     private static int RESULT_LOAD_IMG = 1;
     Context con = this;
@@ -64,8 +58,6 @@ public class Upload_View extends AppCompatActivity {
 
             }
         });
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
     }
 

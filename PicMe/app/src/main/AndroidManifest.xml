@@ -46,11 +46,11 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Albumtitle"
+            android:name=".albumtitle"
             android:label="@string/title_activity_albumtitle"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Upload_View"
+            android:name=".upload_view"
             android:label="@string/title_activity_upload_view"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -15,7 +15,9 @@
         android:gravity="center"
         android:focusable="true"
         android:clickable="true"
-        tools:context="com.example.misanthropic.picme.AlbumViewFragment">
+        tools:context="com.example.misanthropic.picme.AlbumViewFragment"
+        android:layout_below="@+id/header"
+        android:layout_above="@+id/AddAlbum">
     </GridView>
 
     <Button
@@ -47,6 +49,22 @@
         android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Albums"
+        android:id="@+id/header"
+        android:editable="false"
+        android:gravity="center_horizontal"
+        android:textSize="55dp"
+        android:textStyle="bold|italic"
+        android:textColor="#3f7fff"
+        android:singleLine="false"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

@@ -70,7 +70,11 @@
         android:id="@+id/Login"
         android:layout_gravity="left|bottom"
         android:layout_above="@+id/createuser"
-        android:layout_toEndOf="@+id/header" />
+        android:layout_toEndOf="@+id/header"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="5dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -106,7 +110,10 @@
         android:text="Create New Account"
         android:id="@+id/createuser"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/PassField" />
+        android:layout_alignEnd="@+id/PassField"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"/>
 
 
 </RelativeLayout>

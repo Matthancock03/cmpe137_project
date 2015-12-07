@@ -31,7 +31,7 @@ public class PhotoView extends AppCompatActivity {
         addphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gotoUploadView = new Intent(getApplicationContext(), Upload_View.class);
+                Intent gotoUploadView = new Intent(getApplicationContext(), upload_view.class);
                 Bundle bundle = new Bundle();
                 if (albumKey != null) {
                     bundle.putString("ALBUM_KEY", albumKey);

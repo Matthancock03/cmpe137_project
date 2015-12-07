@@ -20,7 +20,7 @@
         android:layout_gravity="center_horizontal|top" />
 
     <TextView android:layout_width="364dp" android:layout_height="111dp"
-        android:text="Enter you friends email address."
+        android:text="Enter your friend&apos;s email address."
         android:layout_gravity="center"
         android:id="@+id/text"
         android:textStyle="bold|italic"
@@ -38,20 +38,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
         android:hint="Email"
-        android:gravity="center" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share Album"
-        android:id="@+id/submit_share"
-        android:layout_gravity="center"
-        android:width="150dp"
-        android:background="#3f7fff"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/gridview"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="250dp"
         android:gravity="center" />
 
     <TextView
@@ -75,5 +61,20 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:layout_marginBottom="25dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share Album"
+        android:id="@+id/submit_share"
+        android:layout_gravity="center_horizontal|bottom"
+        android:width="150dp"
+        android:background="#3f7fff"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/gridview"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="250dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp" />
 
 </FrameLayout>
