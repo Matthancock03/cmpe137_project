@@ -18,7 +18,7 @@ public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     public static Integer [] Images;
     public ArrayList<Bitmap> images = new ArrayList<>();
-    ArrayList<String> albumNames = new ArrayList<>();
+    public ArrayList<String> albumNames = new ArrayList<>();
     public static String [] Titles;
 
     public ImageAdapter(Context c, Integer [] Image, String [] Title) {

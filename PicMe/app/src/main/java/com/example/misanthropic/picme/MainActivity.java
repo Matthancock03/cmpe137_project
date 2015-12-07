@@ -29,6 +29,7 @@ public class MainActivity extends FragmentActivity{
     Firebase albums;
     AlbumsHolder holder;
     HashMap<String, Album> albumMap = new HashMap<>();
+    HashMap<String, Bitmap> albumKeysAndImages = new HashMap<>();
     ArrayList<Bitmap> albumCovers = new ArrayList<>();
     ArrayList<String> albumNames = new ArrayList<>();
     String email;
@@ -47,6 +48,7 @@ public class MainActivity extends FragmentActivity{
         unpackBundle(); // Pulls data passed from other activities out of Bundles
         holder = AlbumsHolder.getInstance();
         this.albumMap = holder.albumMap;
+        this.albumKeysAndImages = holder.albumKeysAndCovers;
         this.albumCovers = holder.albumCovers;
         this.albumNames  = holder.albumNames;
 
@@ -176,10 +178,13 @@ public class MainActivity extends FragmentActivity{
                 while(it.hasNext()){
 
                     DataSnapshot img = (DataSnapshot)it.next();
+                    Bitmap temp = MainActivity.base64ToBitmap(img.getValue().toString());
                     //Log.d(img.getKey(), img.getValue().toString());
                     albm.images.put(Integer.parseInt(img.getKey()), img.getValue().toString());
+                    albm.albumKey = albumKey;
                     if(count == 0){
-                        albumCovers.add(MainActivity.base64ToBitmap(img.getValue().toString()));
+                        albumKeysAndImages.put(albumKey, temp);
+                        albumCovers.add(temp);
                         albumNames.add(albumNme.getValue().toString());
                         Log.d("AlbumView albumName: ", albumNme.getValue().toString());
                     }

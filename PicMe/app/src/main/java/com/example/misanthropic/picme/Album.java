@@ -10,6 +10,7 @@ import java.util.HashMap;
  */
 public class Album {
     public String album;
+    public String albumKey;
     public String album_name;
     public ArrayList<String> comments = new ArrayList<String>();
     HashMap<Integer, String> images = new HashMap<>();
@@ -25,6 +26,8 @@ public class Album {
     public String get_Album(){
         return album;
     }
+
+    public String getAlbumKey(){return albumKey;}
 
     public HashMap<Integer, String> getImages(){
         return images;

@@ -29,7 +29,7 @@ public class PhotoView extends AppCompatActivity {
 
     Button addphoto;
     Button deletephoto;
-
+    public String albumKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,11 @@ public class PhotoView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent gotoUploadView = new Intent(getApplicationContext(), Upload_View.class);
+                Bundle bundle = new Bundle();
+                if (albumKey != null) {
+                    bundle.putString("AlbumKey", albumKey);
+                }
+                gotoUploadView.putExtras(bundle);
                 startActivity(gotoUploadView);
             }
         });
