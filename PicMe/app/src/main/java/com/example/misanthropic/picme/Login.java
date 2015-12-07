@@ -1,30 +1,23 @@
 package com.example.misanthropic.picme;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Debug;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-
-import java.io.IOException;
-import java.util.Map;
-
 import com.firebase.simplelogin.FirebaseSimpleLoginError;
 import com.firebase.simplelogin.FirebaseSimpleLoginUser;
+import com.firebase.simplelogin.SimpleLogin;
 import com.firebase.simplelogin.SimpleLoginAuthenticatedHandler;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
@@ -34,19 +27,23 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.common.Scopes;
+
+import java.io.IOException;
 
 
 public class Login extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
+    public SimpleLogin authClient;
+    private EditText user;
+    private EditText pass;
+    private Button login;
+    private Button createuser;
     Firebase myFirebaseRef;
     String name;
     String email;
@@ -97,11 +94,41 @@ public class Login extends AppCompatActivity implements
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setScopes(gso.getScopeArray());
         // [END customize_button]
+
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+        myFirebaseRef = new Firebase("https://PicMe.firebaseio.com");
+
+        user = (EditText) findViewById(R.id.UserField);
+        pass = (EditText) findViewById(R.id.PassField);
+        login = (Button) findViewById(R.id.Login);
+        createuser = (Button) findViewById(R.id.createuser);
+
+        authClient = new SimpleLogin(myFirebaseRef, getApplicationContext());
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+                email = user.getText().toString();
+                //Toast.makeText(getApplicationContext(), ""+email, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        createuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createuser();
+                //Firebase newaccref = myFirebaseRef.child("Users");
+                //Acc newacc = new Acc(user.getText().toString().replace(".", ","));
+                //newaccref.push().setValue(newacc);
+            }
+        });
         /*
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
 
@@ -148,7 +175,6 @@ public class Login extends AppCompatActivity implements
             final GoogleSignInAccount acct = result.getSignInAccount();
             name = acct.getDisplayName();
             email = acct.getEmail();
-
             Log.d("Login Status: ", "Successful Login");
             Log.d("Email: ", result.getSignInAccount().getIdToken());
             try {
@@ -315,5 +341,37 @@ public class Login extends AppCompatActivity implements
             }
         };
         task.execute();
+    }
+
+    public void GoToActivity(){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public void login(){
+        authClient.loginWithEmail(user.getText().toString(), pass.getText().toString(), new SimpleLoginAuthenticatedHandler() {
+            public void authenticated(FirebaseSimpleLoginError error, FirebaseSimpleLoginUser user) {
+                if (error != null) {
+                    // There was an error logging into this account
+                } else {
+                    // We are now logged in
+                    GoToActivity();
+                }
+            }
+        });
+    }
+
+    public void createuser(){
+        authClient.createUser(user.getText().toString(), pass.getText().toString(), new SimpleLoginAuthenticatedHandler() {
+            public void authenticated(FirebaseSimpleLoginError error, FirebaseSimpleLoginUser user) {
+                if (error != null) {
+                    Toast.makeText(Login.this, "Username is taken", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Login.this, "New Account created", Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+        });
     }
 }
