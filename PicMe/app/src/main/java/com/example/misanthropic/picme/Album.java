@@ -13,7 +13,7 @@ public class Album {
     public String albumKey;
     public String album_name;
     public ArrayList<String> comments = new ArrayList<String>();
-    HashMap<Integer, String> images = new HashMap<>();
+    public ArrayList<String> images = new ArrayList<>();
 
     public Album(){
 
@@ -29,7 +29,7 @@ public class Album {
 
     public String getAlbumKey(){return albumKey;}
 
-    public HashMap<Integer, String> getImages(){
+    public ArrayList<String> getImages(){
         return images;
     }
 }

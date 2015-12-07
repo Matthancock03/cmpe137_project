@@ -12,7 +12,7 @@ public class AlbumsHolder {
     public static String email;
 
     public static HashMap<String, Album> albumMap = new HashMap<>();
-    public static HashMap<String,Bitmap> albumKeysAndCovers = new HashMap<>();
+    public static ArrayList<String> keys = new ArrayList<>();
     public static ArrayList<Bitmap> albumCovers = new ArrayList<>();
     public static ArrayList<String> albumNames = new ArrayList<>();
 

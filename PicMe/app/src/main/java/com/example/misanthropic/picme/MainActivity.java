@@ -30,7 +30,7 @@ public class MainActivity extends FragmentActivity{
     AlbumsHolder holder  = AlbumsHolder.getInstance();
 
     HashMap<String, Album> albumMap = new HashMap<>();
-    HashMap<String, Bitmap> albumKeysAndImages = new HashMap<>();
+    ArrayList<String> albumKeys = new ArrayList<>();
     ArrayList<Bitmap> albumCovers = new ArrayList<>();
     ArrayList<String> albumNames = new ArrayList<>();
     String email;
@@ -48,7 +48,7 @@ public class MainActivity extends FragmentActivity{
         ref = new Firebase("https://PicMe.firebaseio.com/");
         unpackBundle(); // Pulls data passed from other activities out of Bundles
         this.albumMap = holder.albumMap;
-        this.albumKeysAndImages = holder.albumKeysAndCovers;
+        this.albumKeys = holder.keys;
         this.albumCovers = holder.albumCovers;
         this.albumNames  = holder.albumNames;
 
@@ -164,13 +164,16 @@ public class MainActivity extends FragmentActivity{
     }
 
     public void populateAlbums(){
-        Query query = albums.child(email).child("albums").orderByKey();
+        Query query = albums.child(email).orderByKey();
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChild) {
                 Log.d("AlbumView Firebase Key", snapshot.getKey());
-                String albumKey = snapshot.getKey();
+                String album_Key = snapshot.getKey();
+
                 Album albm = new Album();
+                albm.albumKey = album_Key;
+
                 DataSnapshot albumNme = snapshot.child("album_name");
                 DataSnapshot imageArray = snapshot.child("images");
 
@@ -182,18 +185,17 @@ public class MainActivity extends FragmentActivity{
 
                     DataSnapshot img = (DataSnapshot)it.next();
                     Bitmap temp = MainActivity.base64ToBitmap(img.getValue().toString());
-                    //Log.d(img.getKey(), img.getValue().toString());
-                    albm.images.put(Integer.parseInt(img.getKey()), img.getValue().toString());
-                    albm.albumKey = albumKey;
+                    Log.d("Image Key ", img.getKey());
+                    albm.images.add(img.getValue().toString());
                     if(count == 0){
-                        albumKeysAndImages.put(albumKey, temp);
+                        albumKeys.add(album_Key);
                         albumCovers.add(temp);
                         albumNames.add(albumNme.getValue().toString());
                         Log.d("AlbumView albumName: ", albumNme.getValue().toString());
                     }
                     count++;
                 }
-                albumMap.put(albumKey, albm);
+                albumMap.put(album_Key, albm);
             }
 
             public void onChildRemoved(DataSnapshot snapshot){

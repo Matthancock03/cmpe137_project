@@ -23,6 +23,7 @@ import java.io.IOException;
 
 public class CreateAlbum extends FragmentActivity {
     Album albumObject;
+    AlbumsHolder holder = AlbumsHolder.getInstance();
     Firebase ref;
     Firebase albums;
     Firebase imageRef;
@@ -90,11 +91,14 @@ public class CreateAlbum extends FragmentActivity {
         //Log.d("Image Converted", image);
         if(image64 != null) {
             String album = albumName.getText().toString();
+            holder.albumNames.add(album);
             albumObject = new Album();
             albumObject.album_name = album;
-            albumObject.images.put(albumObject.images.size() + 1, image64);
-            ref = albums.child(email).child("albums").push();
+            albumObject.images.add(image64);
+            ref = albums.child(email).push();
             ref.setValue(albumObject);
+
+            //New Arrays will not be pushed now
 
 
             Intent startViewAlbum = new Intent(this, AlbumView.class);
@@ -118,6 +122,7 @@ public class CreateAlbum extends FragmentActivity {
             try {
                 yourSelectedImage = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 yourSelectedImage = MainActivity.getResizedBitmap(yourSelectedImage, 500);
+                holder.albumCovers.add(yourSelectedImage);
                 image64 = MainActivity.bitmapToBase64(yourSelectedImage);
                 setImage();
 

@@ -1,5 +1,6 @@
 package com.example.misanthropic.picme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -26,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 public class Upload_View extends AppCompatActivity {
 
     private static int RESULT_LOAD_IMG = 1;
+    Context con = this;
     String imgDecodableString;
     String index;
     Firebase ref;
@@ -41,7 +43,7 @@ public class Upload_View extends AppCompatActivity {
         setContentView(R.layout.activity_upload_view);
         unpackBundle();
         holder = AlbumsHolder.getInstance();
-        ref = new Firebase("https://PicMe.firebaseio.com/albums/" + holder.email + "/albums/" + albumKey);
+        ref = new Firebase("https://PicMe.firebaseio.com/albums/" + holder.email + "/" + albumKey);
 
         upload = (Button) findViewById(R.id.upload);
 
@@ -50,7 +52,16 @@ public class Upload_View extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: Implement upload functionality
                 //Firebase upload = ref.child("Email").child("-K4kgQJeLE5z18clVq82").child("album");
-                ref.child(index).setValue(bitmapToBase64(yourSelectedImage));
+                ref.child("images").push().setValue(bitmapToBase64(yourSelectedImage));
+                holder.albumMap.get(albumKey).images.add(bitmapToBase64(yourSelectedImage));
+                Intent GotoCreateAlbum = new Intent(con, AlbumView.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("USER_EMAIL", holder.email);
+                //bundle.putString("USER_NAME", "");
+
+                GotoCreateAlbum.putExtras(bundle);
+                startActivity(GotoCreateAlbum);
+
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,10 +90,11 @@ public class Upload_View extends AppCompatActivity {
                 cursor.close();
                 ImageView imgView = (ImageView) findViewById(R.id.imgView);
                 // Set the Image in ImageView after decoding the String
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
 
                 yourSelectedImage = BitmapFactory.decodeFile(imgDecodableString);
+                yourSelectedImage = MainActivity.getResizedBitmap(yourSelectedImage, 500);
+                imgView.setImageBitmap(yourSelectedImage);
+
             }
             else {
                 Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();

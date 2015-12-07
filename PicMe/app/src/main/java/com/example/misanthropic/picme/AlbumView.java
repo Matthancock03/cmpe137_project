@@ -33,13 +33,6 @@ public class AlbumView extends FragmentActivity {
     private Button deleteAlbum;
     GridView gridview;
 
-    final Integer [] myThumbs = {
-            R.mipmap.sample_10
-    };
-
-    final String [] Title = {
-        "Sample"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +65,11 @@ public class AlbumView extends FragmentActivity {
                                     int position, long id) {
                 Intent gotoPhotos = new Intent(getApplicationContext(), PhotoView.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ALBUM_KEY", "TEST");
-                bundle.putString("INDEX", "TEST");
+                Log.d("Album Key", holder.keys.get(position));
+
+                bundle.putString("ALBUM_KEY", holder.keys.get(position));
+                bundle.putInt("INDEX", position);
+                gotoPhotos.putExtras(bundle);
                 startActivity(gotoPhotos);
             }
         });

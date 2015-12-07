@@ -34,8 +34,15 @@ public class ImageAdapter extends BaseAdapter {
         this.albumNames = albumNames;
     }
 
+    public ImageAdapter(Context c, ArrayList<String> images, ArrayList<String> albumNames, int dummy) {
+        mContext = c;
+        this.images = convertImages(images);
+        this.albumNames = albumNames;
+    }
+
+
     public int getCount() {
-        return (Titles == null)?albumNames.size(): Titles.length;
+        return (Titles == null)?images.size(): Titles.length;
     }
 
     public Object getItem(int position) {
@@ -54,11 +61,24 @@ public class ImageAdapter extends BaseAdapter {
         grid = inflater.inflate(R.layout.fragment_albumtitle, null);
         TextView textview = (TextView) grid.findViewById(R.id.grid_item_label);
         ImageView imageview = (ImageView) grid.findViewById(R.id.grid_item_image);
-
+        try{
         textview.setText(albumNames.get(position));
+        }catch(Exception e)
+        {
+            textview.setText(String.valueOf(position));
+        }
         imageview.setImageBitmap(images.get(position));
 
 
         return grid;
+    }
+
+    public ArrayList<Bitmap> convertImages(ArrayList<String> strings){
+        ArrayList<Bitmap> imgs = new ArrayList<>();
+        for(String x: strings){
+            imgs.add(MainActivity.base64ToBitmap(x));
+        }
+
+        return imgs;
     }
 }
