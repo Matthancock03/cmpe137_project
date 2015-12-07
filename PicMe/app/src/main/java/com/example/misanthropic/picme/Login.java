@@ -345,10 +345,16 @@ public class Login extends AppCompatActivity implements
 
     public void GoToActivity(){
         Intent i = new Intent(this, MainActivity.class);
+        String eml = user.getText().toString();
+        eml = eml.replaceAll("\\.", ",");
+        Log.d("GoToActivity Email", eml);
+        Bundle bundle = new Bundle();
+        bundle.putString("USER_EMAIL", eml);
+        i.putExtras(bundle);
         startActivity(i);
     }
 
-    public void login(){
+    public void login() {
         authClient.loginWithEmail(user.getText().toString(), pass.getText().toString(), new SimpleLoginAuthenticatedHandler() {
             public void authenticated(FirebaseSimpleLoginError error, FirebaseSimpleLoginUser user) {
                 if (error != null) {
@@ -361,7 +367,7 @@ public class Login extends AppCompatActivity implements
         });
     }
 
-    public void createuser(){
+    public void createuser() {
         authClient.createUser(user.getText().toString(), pass.getText().toString(), new SimpleLoginAuthenticatedHandler() {
             public void authenticated(FirebaseSimpleLoginError error, FirebaseSimpleLoginUser user) {
                 if (error != null) {
