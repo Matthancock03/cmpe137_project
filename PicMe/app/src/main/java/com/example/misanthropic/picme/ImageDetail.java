@@ -1,9 +1,12 @@
 package com.example.misanthropic.picme;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -15,14 +18,14 @@ import java.util.ArrayList;
 
 import com.firebase.client.Firebase;
 
-public class ImageDetail extends PhotoView {
-    Firebase image;
+public class ImageDetail extends AppCompatActivity {
     Firebase album;
     ImageView iv;
     ListView comments_holder;
     ArrayList<String> comments;
     EditText comment_field;
     ArrayAdapter adapter;
+    String image;
 
     String[] testValues = new String[] { "Android", "iPhone", "WindowsMobile",
             "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
@@ -34,26 +37,24 @@ public class ImageDetail extends PhotoView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_detail);
 
-        Intent i = getIntent();
+        unpackBundle();
 
-        int position = (Integer) i.getExtras().getInt("id");
         iv = (ImageView) findViewById(R.id.imageView);
-        iv.setImageResource(ImageAdapter.Images[position]);
+        iv.setImageBitmap(MainActivity.base64ToBitmap(image));
 
         //Set up Firebase
         Firebase.setAndroidContext(this);
-        image = new Firebase("https://PicMe.firebaseio.com/albums/images/id");
 
-        // Get Comments ListView and set adapter
+        /*/ Get Comments ListView and set adapter
         comments_holder = (ListView)findViewById(R.id.comment_list);
         adapter = new ArrayAdapter<String>(this,R.layout.fragment_image_detail , testValues); // Used to dynamically update view on data change.
         comments_holder.setAdapter(adapter);
-        // Get Comments from Firebase
+        /*/
 
     }
 
     public void addComment(){
-        comment_field = (EditText)findViewById(R.id.comment_input);
+        comment_field = (EditText) findViewById(R.id.comment_input);
         String com = comment_field.toString();
         comments.add(com);
         TextView txt = new TextView(this);
@@ -64,5 +65,13 @@ public class ImageDetail extends PhotoView {
     public void retrieveComments(){
 
     }
+    public void unpackBundle(){
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        Log.d("Photo Detail", "Init");
 
+        if(extras!= null){
+            image = extras.getString("IMAGE");
+        }
+    }
 }

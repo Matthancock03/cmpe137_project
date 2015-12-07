@@ -15,17 +15,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Image Name"
-        android:id="@+id/image_name"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:textColor="#3f7fff"
-        android:textSize="30dp"
-        android:textStyle="bold|italic" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Comments"
         android:id="@+id/textView3"
         android:layout_gravity="left|bottom|center"
@@ -41,7 +30,7 @@
         android:id="@+id/comment_input"
         android:layout_gravity="center"
         android:hint="Leave Comment"
-        android:layout_marginTop="75dp" />
+        android:layout_marginTop="90dp" />
 
     <ListView
         android:layout_width="match_parent"

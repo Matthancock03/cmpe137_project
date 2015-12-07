@@ -91,7 +91,7 @@ public class CreateAlbum extends FragmentActivity {
         //Log.d("Image Converted", image);
         if(image64 != null) {
             String album = albumName.getText().toString();
-            holder.albumNames.add(album);
+            //holder.albumNames.add(album);
             albumObject = new Album();
             albumObject.album_name = album;
             albumObject.images.add(image64);
@@ -122,7 +122,7 @@ public class CreateAlbum extends FragmentActivity {
             try {
                 yourSelectedImage = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                 yourSelectedImage = MainActivity.getResizedBitmap(yourSelectedImage, 500);
-                holder.albumCovers.add(yourSelectedImage);
+                //holder.albumCovers.add(yourSelectedImage);
                 image64 = MainActivity.bitmapToBase64(yourSelectedImage);
                 setImage();
 

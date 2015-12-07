@@ -44,14 +44,15 @@ public class PhotoView extends AppCompatActivity {
         });
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        Log.d("Album Images size", String.valueOf(holder.albumMap.get(albumKey).images.size()));
         gridview.setAdapter(new ImageAdapter(this, holder.albumMap.get(albumKey).images, holder.albumNames, 0));
 
         gridview.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent gotoImageDetail = new Intent(getApplicationContext(), ImageDetail.class);
-                gotoImageDetail.putExtra("id", position);
+                Bundle bundle = new Bundle();
+                bundle.putString("IMAGE", holder.albumMap.get(albumKey).images.get(position));
+                gotoImageDetail.putExtras(bundle);
                 startActivity(gotoImageDetail);
             }
         });
