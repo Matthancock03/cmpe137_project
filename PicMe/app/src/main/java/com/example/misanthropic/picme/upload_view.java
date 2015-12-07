@@ -25,7 +25,7 @@ public class Upload_View extends AppCompatActivity {
 
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
-    Firebase ref = new Firebase("https://shining-heat-4056.firebaseio.com/");
+    Firebase ref;
 
     public Bitmap yourSelectedImage;
 
@@ -36,7 +36,8 @@ public class Upload_View extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_view);
 
-        getIntent();
+        AlbumsHolder holder = AlbumsHolder.getInstance();
+        ref = new Firebase("https://shining-heat-4056.firebaseio.com/albums/" + holder.email + "/albums");
 
         upload = (Button) findViewById(R.id.upload);
 
@@ -48,7 +49,6 @@ public class Upload_View extends AppCompatActivity {
                 upload.push().setValue(bitmapToBase64(yourSelectedImage));
             }
         });
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

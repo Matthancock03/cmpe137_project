@@ -58,13 +58,13 @@ public class MainActivity extends FragmentActivity{
                 StartViewAlbumActivity();
             }
         });
-        /*
+
         sharealbum = (Button) findViewById(R.id.share_album);
 
         sharealbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StartViewAlbumActivity();
+                StartShareAlbumActivity();
             }
         });
 
@@ -73,24 +73,13 @@ public class MainActivity extends FragmentActivity{
         friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StartViewAlbumActivity();
+                StartShareAlbumActivity();
             }
         });
-        */
+
 
     }
 
-    public void StartCreateAlbumActivity(){
-        Intent GotoCreateAlbum = new Intent(this, CreateAlbum.class);
-        Bundle bundle = new Bundle();
-
-        if(email != null && name != null) {
-            bundle.putString("USER_EMAIL", email);
-            bundle.putString("USER_NAME", name);
-        }
-        GotoCreateAlbum.putExtras(bundle);
-        startActivity(GotoCreateAlbum);
-    }
 
     public void StartViewAlbumActivity(){
         Intent startViewAlbum = new Intent(this, AlbumView.class);
@@ -102,6 +91,18 @@ public class MainActivity extends FragmentActivity{
         startViewAlbum.putExtras(bundle);
         startActivity(startViewAlbum);
     }
+
+    public void StartShareAlbumActivity(){
+        Intent startShareAlbum = new Intent(this, ShareAlbum.class);
+        Bundle bundle = new Bundle();
+        if(email != null && name != null) {
+            bundle.putString("USER_EMAIL", email);
+            bundle.putString("USER_NAME", name);
+        }
+        startShareAlbum.putExtras(bundle);
+        startActivity(startShareAlbum);
+    }
+
 
     // Use this to convert image before saving to Firebase
     public static String bitmapToBase64(Bitmap bitmap) {
@@ -148,6 +149,7 @@ public class MainActivity extends FragmentActivity{
             TextView text = (TextView)findViewById(R.id.displayHeader);
             email = extras.getString("USER_EMAIL");
             Log.d("Email in Main", email);
+            holder.email = email;
             populateAlbums();
             if(extras.containsKey("NAME")){
                 name = extras.getString("NAME");

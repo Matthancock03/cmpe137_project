@@ -5,12 +5,12 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="361dp"
+        android:layout_height="361dp"
         android:id="@+id/imageView"
         android:src="@mipmap/create_album_image"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="250dp" />
+        android:layout_marginBottom="250dp"
+        android:layout_gravity="top|center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"

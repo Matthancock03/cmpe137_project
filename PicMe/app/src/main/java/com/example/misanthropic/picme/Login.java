@@ -148,6 +148,7 @@ public class Login extends AppCompatActivity implements
             final GoogleSignInAccount acct = result.getSignInAccount();
             name = acct.getDisplayName();
             email = acct.getEmail();
+
             Log.d("Login Status: ", "Successful Login");
             Log.d("Email: ", result.getSignInAccount().getIdToken());
             try {
